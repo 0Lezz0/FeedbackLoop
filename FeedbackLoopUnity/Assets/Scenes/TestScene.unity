@@ -238,6 +238,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!20 &407899372 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4380779731777298641, guid: 7a728b032b13a5249bda6487d70b1701, type: 3}
+  m_PrefabInstance: {fileID: 4380779731624660386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,6 +351,30 @@ PrefabInstance:
     - target: {fileID: 1830940502703308065, guid: 7a728b032b13a5249bda6487d70b1701, type: 3}
       propertyPath: _groundSpeed
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830940502703308065, guid: 7a728b032b13a5249bda6487d70b1701, type: 3}
+      propertyPath: _verticalSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830940502703308065, guid: 7a728b032b13a5249bda6487d70b1701, type: 3}
+      propertyPath: _mainMechaCamera
+      value: 
+      objectReference: {fileID: 407899372}
+    - target: {fileID: 1830940502703308065, guid: 7a728b032b13a5249bda6487d70b1701, type: 3}
+      propertyPath: _mouseSensitivity.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830940502703308065, guid: 7a728b032b13a5249bda6487d70b1701, type: 3}
+      propertyPath: _mouseSensitivity.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830940502703308065, guid: 7a728b032b13a5249bda6487d70b1701, type: 3}
+      propertyPath: _verticalCameraLimitAir
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830940502703308065, guid: 7a728b032b13a5249bda6487d70b1701, type: 3}
+      propertyPath: _verticalCameraLimitGround
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3413406701315471725, guid: 7a728b032b13a5249bda6487d70b1701, type: 3}
       propertyPath: m_Constraints
