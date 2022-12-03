@@ -51,8 +51,17 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
                     ""id"": ""8371f443-bb61-4682-abf7-262d121bb6cb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TakeOff"",
+                    ""type"": ""Button"",
+                    ""id"": ""a91e4a4f-5825-4d57-aa22-d791ec0dfa7d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 },
                 {
                     ""name"": ""Aim"",
@@ -214,6 +223,17 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
                     ""action"": ""Shoot special"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18d04bd5-6ea9-4609-8184-bb81ddb16b39"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""General control scheme"",
+                    ""action"": ""TakeOff"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -231,6 +251,7 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
         m_MechaActions_Movement = m_MechaActions.FindAction("Movement", throwIfNotFound: true);
         m_MechaActions_Pitchcontrol = m_MechaActions.FindAction("Pitch control", throwIfNotFound: true);
         m_MechaActions_Dashjump = m_MechaActions.FindAction("Dash/jump", throwIfNotFound: true);
+        m_MechaActions_TakeOff = m_MechaActions.FindAction("TakeOff", throwIfNotFound: true);
         m_MechaActions_Aim = m_MechaActions.FindAction("Aim", throwIfNotFound: true);
         m_MechaActions_Shootmain = m_MechaActions.FindAction("Shoot main", throwIfNotFound: true);
         m_MechaActions_Shootspecial = m_MechaActions.FindAction("Shoot special", throwIfNotFound: true);
@@ -296,6 +317,7 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_MechaActions_Movement;
     private readonly InputAction m_MechaActions_Pitchcontrol;
     private readonly InputAction m_MechaActions_Dashjump;
+    private readonly InputAction m_MechaActions_TakeOff;
     private readonly InputAction m_MechaActions_Aim;
     private readonly InputAction m_MechaActions_Shootmain;
     private readonly InputAction m_MechaActions_Shootspecial;
@@ -306,6 +328,7 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_MechaActions_Movement;
         public InputAction @Pitchcontrol => m_Wrapper.m_MechaActions_Pitchcontrol;
         public InputAction @Dashjump => m_Wrapper.m_MechaActions_Dashjump;
+        public InputAction @TakeOff => m_Wrapper.m_MechaActions_TakeOff;
         public InputAction @Aim => m_Wrapper.m_MechaActions_Aim;
         public InputAction @Shootmain => m_Wrapper.m_MechaActions_Shootmain;
         public InputAction @Shootspecial => m_Wrapper.m_MechaActions_Shootspecial;
@@ -327,6 +350,9 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
                 @Dashjump.started -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnDashjump;
                 @Dashjump.performed -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnDashjump;
                 @Dashjump.canceled -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnDashjump;
+                @TakeOff.started -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnTakeOff;
+                @TakeOff.performed -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnTakeOff;
+                @TakeOff.canceled -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnTakeOff;
                 @Aim.started -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnAim;
@@ -349,6 +375,9 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
                 @Dashjump.started += instance.OnDashjump;
                 @Dashjump.performed += instance.OnDashjump;
                 @Dashjump.canceled += instance.OnDashjump;
+                @TakeOff.started += instance.OnTakeOff;
+                @TakeOff.performed += instance.OnTakeOff;
+                @TakeOff.canceled += instance.OnTakeOff;
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
@@ -376,6 +405,7 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnPitchcontrol(InputAction.CallbackContext context);
         void OnDashjump(InputAction.CallbackContext context);
+        void OnTakeOff(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnShootmain(InputAction.CallbackContext context);
         void OnShootspecial(InputAction.CallbackContext context);

@@ -29,8 +29,17 @@
                     "id": "8371f443-bb61-4682-abf7-262d121bb6cb",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TakeOff",
+                    "type": "Button",
+                    "id": "a91e4a4f-5825-4d57-aa22-d791ec0dfa7d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Aim",
@@ -190,6 +199,17 @@
                     "processors": "",
                     "groups": "General control scheme",
                     "action": "Shoot special",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18d04bd5-6ea9-4609-8184-bb81ddb16b39",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "General control scheme",
+                    "action": "TakeOff",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

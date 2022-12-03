@@ -55,9 +55,9 @@ public class MechaMovement : MonoBehaviour
         movement = mechaActions.Movement.ReadValue<Vector2>();
         pitch = mechaActions.Pitchcontrol.ReadValue<float>();
 
-        if (mechaActions.Dashjump.IsPressed())
+        if (mechaActions.TakeOff.triggered)
         {
-            shouldJumpOrDash = true;
+            ToggleFlight();
         }
 
         AimCamera(mechaActions.Aim.ReadValue<Vector2>());
