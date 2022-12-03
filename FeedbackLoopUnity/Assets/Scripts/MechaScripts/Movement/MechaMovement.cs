@@ -16,9 +16,8 @@ public class MechaMovement : MonoBehaviour
     private float pitch;
     private bool shouldJumpOrDash;
     private float verticalCameraRotation;
+    private MechaStatus mechaStatus;
 
-    [SerializeField]
-    private bool _isFlying;
     [SerializeField]
     private float _groundSpeed, _airSpeed, _verticalSpeed;
     [SerializeField]
@@ -27,7 +26,6 @@ public class MechaMovement : MonoBehaviour
     private Camera _mainMechaCamera;
     [SerializeField]
     private Vector2 _mouseSensitivity;
-    public bool IsFlying { get => _isFlying; set => _isFlying = value; }
     public float GroundSpeed { get => _groundSpeed; set => _groundSpeed = value; }
     public float AirSpeed { get => _airSpeed; set => _airSpeed = value; }
     public Camera MainMechaCamera { get => _mainMechaCamera; set => _mainMechaCamera = value; }
@@ -44,8 +42,9 @@ public class MechaMovement : MonoBehaviour
         mechaActions.Enable();
 
         mechaRigidBody = gameObject.GetComponent<Rigidbody>();
+        mechaStatus = gameObject.GetComponent<MechaStatus>();
 
-        IsFlying = false;
+        mechaStatus.IsFlying = false;
         verticalCameraRotation = 0f;
     }
 
@@ -57,14 +56,14 @@ public class MechaMovement : MonoBehaviour
 
         if (mechaActions.TakeOff.triggered)
         {
-            ToggleFlight();
+            mechaStatus.ToggleFlight();
         }
 
         AimCamera(mechaActions.Aim.ReadValue<Vector2>());
     }
     private void FixedUpdate()
     {
-        if (IsFlying)
+        if (mechaStatus.IsFlying)
         {
             mechaRigidBody.useGravity = false;
             MoveOnAir();
@@ -78,7 +77,7 @@ public class MechaMovement : MonoBehaviour
         if (shouldJumpOrDash)
         {
             shouldJumpOrDash = false;
-            ToggleFlight();
+            mechaStatus.ToggleFlight();
         }
     }
 
@@ -115,15 +114,11 @@ public class MechaMovement : MonoBehaviour
 
     }
     
-    private void ToggleFlight()
-    {
-        IsFlying = !IsFlying;
-    }
     private void AimCamera(Vector2 aimingPoint)
     {
 
         verticalCameraRotation -= (aimingPoint.y * Time.deltaTime) * MouseSensitivity.y;
-        if (IsFlying)
+        if (mechaStatus.IsFlying)
         {
             verticalCameraRotation = Mathf.Clamp(verticalCameraRotation, -1f * VerticalCameraLimitAir, VerticalCameraLimitAir);
         }
