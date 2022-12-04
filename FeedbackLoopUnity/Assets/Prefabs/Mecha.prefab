@@ -494,12 +494,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {x: 0, y: 0}
   pitch: 0
-  _groundSpeed: 100
-  _airSpeed: 200
-  _verticalSpeed: 75
-  _airDashImpulse: 400
-  _airDashCooldown: 1
-  _airDashDuration: 2
   _verticalCameraLimitGround: 10
   _verticalCameraLimitAir: 20
   _mainMechaCamera: {fileID: 4380779731777298641}
@@ -534,3 +528,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isFlying: 0
   _isDashing: 0
+  _groundSpeed: 100
+  _airSpeed: 150
+  _verticalSpeed: 75
+  _airDashImpulse: 350
+  _airDashCooldown: 3
+  _airDashDuration: 2

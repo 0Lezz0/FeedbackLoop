@@ -19,27 +19,15 @@ public class MechaMovement : MonoBehaviour
     private MechaStatus mechaStatus;
 
     [SerializeField]
-    private float _groundSpeed, _airSpeed, _verticalSpeed;
-    [SerializeField]
-    private float _airDashImpulse;
-    [SerializeField]
-    private float _airDashCooldown, _airDashDuration;
-    [SerializeField]
     private float _verticalCameraLimitGround, _verticalCameraLimitAir;
     [SerializeField]
     private Camera _mainMechaCamera;
     [SerializeField]
     private Vector2 _mouseSensitivity;
-    public float GroundSpeed { get => _groundSpeed; set => _groundSpeed = value; }
-    public float AirSpeed { get => _airSpeed; set => _airSpeed = value; }
     public Camera MainMechaCamera { get => _mainMechaCamera; set => _mainMechaCamera = value; }
     public Vector2 MouseSensitivity { get => _mouseSensitivity; set => _mouseSensitivity = value; }
-    public float VerticalSpeed { get => _verticalSpeed; set => _verticalSpeed = value; }
     public float VerticalCameraLimitGround { get => _verticalCameraLimitGround; set => _verticalCameraLimitGround = value; }
     public float VerticalCameraLimitAir { get => _verticalCameraLimitAir; set => _verticalCameraLimitAir = value; }
-    public float AirDashImpulse { get => _airDashImpulse; set => _airDashImpulse = value; }
-    public float AirDashCooldown { get => _airDashCooldown; set => _airDashCooldown = value; }
-    public float AirDashDuration { get => _airDashDuration; set => _airDashDuration = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -99,7 +87,7 @@ public class MechaMovement : MonoBehaviour
 
     private void MoveOnGround()
     {
-        Vector3 velocity = GetMovementDirection() * GroundSpeed;
+        Vector3 velocity = GetMovementDirection() * mechaStatus.GroundSpeed;
 
         mechaRigidBody.AddForce(velocity, ForceMode.Impulse);
     }
@@ -108,7 +96,9 @@ public class MechaMovement : MonoBehaviour
     {
         Vector3 moveDirection = GetMovementDirection();
 
-        Vector3 velocity = new Vector3(moveDirection.x * AirSpeed, pitch * VerticalSpeed, moveDirection.z * AirSpeed);
+        Vector3 velocity = new Vector3(moveDirection.x * mechaStatus.AirSpeed, 
+            pitch * mechaStatus.VerticalSpeed, 
+            moveDirection.z * mechaStatus.AirSpeed);
 
         mechaRigidBody.AddForce(velocity, ForceMode.Impulse);
     }
@@ -170,8 +160,8 @@ public class MechaMovement : MonoBehaviour
     {
 
         mechaStatus.IsDashing = true;
-        mechaRigidBody.AddForce(movementDirection * AirDashImpulse, ForceMode.VelocityChange);
-        yield return new WaitForSeconds(AirDashDuration);
+        mechaRigidBody.AddForce(movementDirection * mechaStatus.AirDashImpulse, ForceMode.VelocityChange);
+        yield return new WaitForSeconds(mechaStatus.AirDashDuration);
     }
 
 }
