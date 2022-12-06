@@ -391,6 +391,7 @@ GameObject:
   - component: {fileID: 1830940502703308065}
   - component: {fileID: 3413406701315471725}
   - component: {fileID: 4995032953605196924}
+  - component: {fileID: 4351721461255928720}
   m_Layer: 0
   m_Name: Mecha
   m_TagString: Player
@@ -534,3 +535,15 @@ MonoBehaviour:
   _airDashImpulse: 350
   _airDashCooldown: 3
   _airDashDuration: 2
+--- !u!114 &4351721461255928720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4380779732825069166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69f031c3200fc74c825f216bcf7efdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

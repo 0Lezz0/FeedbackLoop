@@ -42,7 +42,7 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
                     ""id"": ""0dc4ebe5-13a5-4399-9deb-ddf34e1ee415"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=1.5)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -60,7 +60,7 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
                     ""id"": ""a91e4a4f-5825-4d57-aa22-d791ec0dfa7d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {

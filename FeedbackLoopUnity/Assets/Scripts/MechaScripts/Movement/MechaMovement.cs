@@ -14,7 +14,7 @@ public class MechaMovement : MonoBehaviour
     private Vector2 movement;
     [SerializeField]
     private float pitch;
-    private bool shouldJumpOrDash;
+    private bool shouldJumpOrDash, shouldTakeOff;
     private float verticalCameraRotation;
     private MechaStatus mechaStatus;
 
@@ -49,9 +49,14 @@ public class MechaMovement : MonoBehaviour
         movement = mechaActions.Movement.ReadValue<Vector2>();
         pitch = mechaActions.Pitchcontrol.ReadValue<float>();
 
+        if (mechaActions.Pitchcontrol.WasPerformedThisFrame() && !mechaStatus.IsFlying)
+        {
+            shouldTakeOff = true;
+        }
+
         if (mechaActions.TakeOff.triggered)
         {
-            mechaStatus.ToggleFlight();
+            shouldTakeOff = true;
         }
 
         if (mechaActions.Dashjump.triggered)
@@ -82,6 +87,18 @@ public class MechaMovement : MonoBehaviour
             shouldJumpOrDash = false;
             Dash();
         }
+
+        if (shouldTakeOff)
+        {
+            shouldTakeOff = false;
+            TakeOff();
+        }
+
+        if (mechaStatus.IsFalling)
+        {
+            mechaStatus.IsFlying = false;
+            mechaRigidBody.AddForce(Physics.gravity, ForceMode.VelocityChange);
+        }
     }
 
 
@@ -111,9 +128,17 @@ public class MechaMovement : MonoBehaviour
         return moveDirection;
     }
 
-    private void IsTakeOff()
+    private void TakeOff()
     {
-
+        if (!mechaStatus.IsFlying)
+        {
+            mechaRigidBody.AddForce(gameObject.transform.up * mechaStatus.AirDashImpulse/3, ForceMode.VelocityChange);
+            mechaStatus.IsFlying = true;
+        }
+        else {
+            mechaStatus.ToggleFlight();
+            mechaStatus.IsFalling = true;
+        }
     }
 
     private bool CanDash()
@@ -163,5 +188,4 @@ public class MechaMovement : MonoBehaviour
         mechaRigidBody.AddForce(movementDirection * mechaStatus.AirDashImpulse, ForceMode.VelocityChange);
         yield return new WaitForSeconds(mechaStatus.AirDashDuration);
     }
-
 }

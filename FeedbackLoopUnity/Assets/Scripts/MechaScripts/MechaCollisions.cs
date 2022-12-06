@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class MechaCollisions : MonoBehaviour
 {
+
+    private const string ENVIORMENT_TAG = "Enviorment";
+
+    private Rigidbody mechaRigidBody;
+    private MechaStatus mechaStatus;
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        mechaStatus = gameObject.GetComponent<MechaStatus>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag(ENVIORMENT_TAG))
+        {
+            if (mechaStatus.IsFlying || mechaStatus.IsFalling)
+            {
+                mechaStatus.IsFlying = false;
+                mechaStatus.IsFalling = false;
+            }
+        }
     }
 }

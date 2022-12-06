@@ -4,11 +4,12 @@ using UnityEngine;
 
 /// <summary>
 /// This class is used to determinatediferent states of the playable character
+/// It probably should be a singleton
 /// </summary>
 public class MechaStatus : MonoBehaviour
 {
     [SerializeField]
-    private bool _isFlying, _isDashing;
+    private bool _isFlying, _isDashing, _isFalling;
 
     [SerializeField]
     private float _groundSpeed, _airSpeed, _verticalSpeed;
@@ -18,6 +19,14 @@ public class MechaStatus : MonoBehaviour
     private float _airDashCooldown, _airDashDuration;
     public bool IsFlying { get => _isFlying; set => _isFlying = value; }
     public bool IsDashing { get => _isDashing; set => _isDashing = value; }
+    public bool IsFalling { get
+        {
+            if (IsFlying)
+                return false;
+
+            return _isFalling;
+        }
+        set => _isFalling = value; }
     public float GroundSpeed { get => _groundSpeed; set => _groundSpeed = value; }
     public float AirSpeed { get => _airSpeed; set => _airSpeed = value; }
     public float VerticalSpeed { get => _verticalSpeed; set => _verticalSpeed = value; }
@@ -45,4 +54,9 @@ public class MechaStatus : MonoBehaviour
     {
         IsDashing = !IsDashing;
     }
+    public void ToggleFallingState()
+    {
+        IsFalling = !IsFalling;
+    }
+
 }
