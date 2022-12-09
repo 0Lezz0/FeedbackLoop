@@ -14,25 +14,18 @@ public class MechaMovement : MonoBehaviour
     private Vector2 movement;
     [SerializeField]
     private float pitch;
-    private bool shouldJumpOrDash;
+    private bool shouldJumpOrDash, shouldTakeOff;
     private float verticalCameraRotation;
+    private MechaStatus mechaStatus;
 
-    [SerializeField]
-    private bool _isFlying;
-    [SerializeField]
-    private float _groundSpeed, _airSpeed, _verticalSpeed;
     [SerializeField]
     private float _verticalCameraLimitGround, _verticalCameraLimitAir;
     [SerializeField]
     private Camera _mainMechaCamera;
     [SerializeField]
     private Vector2 _mouseSensitivity;
-    public bool IsFlying { get => _isFlying; set => _isFlying = value; }
-    public float GroundSpeed { get => _groundSpeed; set => _groundSpeed = value; }
-    public float AirSpeed { get => _airSpeed; set => _airSpeed = value; }
     public Camera MainMechaCamera { get => _mainMechaCamera; set => _mainMechaCamera = value; }
     public Vector2 MouseSensitivity { get => _mouseSensitivity; set => _mouseSensitivity = value; }
-    public float VerticalSpeed { get => _verticalSpeed; set => _verticalSpeed = value; }
     public float VerticalCameraLimitGround { get => _verticalCameraLimitGround; set => _verticalCameraLimitGround = value; }
     public float VerticalCameraLimitAir { get => _verticalCameraLimitAir; set => _verticalCameraLimitAir = value; }
 
@@ -44,8 +37,9 @@ public class MechaMovement : MonoBehaviour
         mechaActions.Enable();
 
         mechaRigidBody = gameObject.GetComponent<Rigidbody>();
+        mechaStatus = gameObject.GetComponent<MechaStatus>();
 
-        IsFlying = false;
+        mechaStatus.IsFlying = false;
         verticalCameraRotation = 0f;
     }
 
@@ -55,75 +49,108 @@ public class MechaMovement : MonoBehaviour
         movement = mechaActions.Movement.ReadValue<Vector2>();
         pitch = mechaActions.Pitchcontrol.ReadValue<float>();
 
+        if (mechaActions.Pitchcontrol.WasPerformedThisFrame() && !mechaStatus.IsFlying)
+        {
+            shouldTakeOff = true;
+        }
+
         if (mechaActions.TakeOff.triggered)
         {
-            ToggleFlight();
+            shouldTakeOff = true;
+        }
+
+        if (mechaActions.Dashjump.triggered)
+        {
+            shouldJumpOrDash = true;
         }
 
         AimCamera(mechaActions.Aim.ReadValue<Vector2>());
     }
     private void FixedUpdate()
     {
-        if (IsFlying)
+        if (!mechaStatus.IsDashing)
         {
-            mechaRigidBody.useGravity = false;
-            MoveOnAir();
-        }
-        else
-        {
-            mechaRigidBody.useGravity = true;
-            MoveOnGround();
+            if (mechaStatus.IsFlying)
+            {
+                mechaRigidBody.useGravity = false;
+                MoveOnAir();
+            }
+            else
+            {
+                mechaRigidBody.useGravity = true;
+                MoveOnGround();
+            }
         }
 
         if (shouldJumpOrDash)
         {
             shouldJumpOrDash = false;
-            ToggleFlight();
+            Dash();
+        }
+
+        if (shouldTakeOff)
+        {
+            shouldTakeOff = false;
+            TakeOff();
+        }
+
+        if (mechaStatus.IsFalling)
+        {
+            mechaStatus.IsFlying = false;
+            mechaRigidBody.AddForce(Physics.gravity, ForceMode.VelocityChange);
         }
     }
 
 
     private void MoveOnGround()
     {
-        Vector3 cameraForward = new(gameObject.transform.forward.x, 0, gameObject.transform.forward.z);
-        Vector3 cameraRight = new(gameObject.transform.right.x, 0, gameObject.transform.right.z);
-        Vector3 moveDirection = cameraForward.normalized * movement.y + cameraRight.normalized * movement.x;
-
-        Vector3 velocity = moveDirection * GroundSpeed;
+        Vector3 velocity = GetMovementDirection() * mechaStatus.GroundSpeed;
 
         mechaRigidBody.AddForce(velocity, ForceMode.Impulse);
     }
 
     private void MoveOnAir()
     {
-        Vector3 cameraForward = new(gameObject.transform.forward.x, 0, gameObject.transform.forward.z);
-        Vector3 cameraRight = new(gameObject.transform.right.x, 0, gameObject.transform.right.z);
-        Vector3 moveDirection = cameraForward.normalized * movement.y + cameraRight.normalized * movement.x;
+        Vector3 moveDirection = GetMovementDirection();
 
-        Vector3 velocity = new Vector3(moveDirection.x * AirSpeed, pitch * VerticalSpeed, moveDirection.z * AirSpeed);
+        Vector3 velocity = new Vector3(moveDirection.x * mechaStatus.AirSpeed, 
+            pitch * mechaStatus.VerticalSpeed, 
+            moveDirection.z * mechaStatus.AirSpeed);
 
         mechaRigidBody.AddForce(velocity, ForceMode.Impulse);
     }
 
-    private void IsTakeOff()
+    private Vector3 GetMovementDirection()
     {
-
+        Vector3 cameraForward = new(gameObject.transform.forward.x, 0, gameObject.transform.forward.z);
+        Vector3 cameraRight = new(gameObject.transform.right.x, 0, gameObject.transform.right.z);
+        Vector3 moveDirection = cameraForward.normalized * movement.y + cameraRight.normalized * movement.x;
+        return moveDirection;
     }
 
-    private void CanDash()
+    private void TakeOff()
     {
+        if (!mechaStatus.IsFlying)
+        {
+            mechaRigidBody.AddForce(gameObject.transform.up * mechaStatus.AirDashImpulse/3, ForceMode.VelocityChange);
+            mechaStatus.IsFlying = true;
+        }
+        else {
+            mechaStatus.ToggleFlight();
+            mechaStatus.IsFalling = true;
+        }
+    }
 
+    private bool CanDash()
+    {
+        return mechaStatus.IsFlying && !mechaStatus.IsDashing;
     }
     
-    private void ToggleFlight()
-    {
-        IsFlying = !IsFlying;
-    }
     private void AimCamera(Vector2 aimingPoint)
     {
 
         verticalCameraRotation -= (aimingPoint.y * Time.deltaTime) * MouseSensitivity.y;
-        if (IsFlying)
+        if (mechaStatus.IsFlying)
         {
             verticalCameraRotation = Mathf.Clamp(verticalCameraRotation, -1f * VerticalCameraLimitAir, VerticalCameraLimitAir);
         }
@@ -133,5 +160,32 @@ public class MechaMovement : MonoBehaviour
 
         MainMechaCamera.transform.localRotation = Quaternion.Euler(verticalCameraRotation, 0, 0);
         transform.Rotate(Vector3.up * (aimingPoint.x * Time.deltaTime) * MouseSensitivity.x);
+    }
+
+    private void Dash()
+    {
+        if (CanDash())
+        {
+            Vector3 movementDirection;
+            if(pitch != 0)
+            {
+                movementDirection = gameObject.transform.up * pitch;
+            } 
+            else
+            {
+                movementDirection = GetMovementDirection();
+            }
+
+            StartCoroutine(DashCoroutine(movementDirection));
+            mechaStatus.IsDashing = false;
+        }
+    }
+
+    private IEnumerator DashCoroutine(Vector3 movementDirection)
+    {
+
+        mechaStatus.IsDashing = true;
+        mechaRigidBody.AddForce(movementDirection * mechaStatus.AirDashImpulse, ForceMode.VelocityChange);
+        yield return new WaitForSeconds(mechaStatus.AirDashDuration);
     }
 }
