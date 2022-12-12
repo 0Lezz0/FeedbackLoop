@@ -12,6 +12,9 @@ public class MechaStatus : MonoBehaviour
     private bool _isFlying, _isDashing, _isFalling;
 
     [SerializeField]
+    private bool _isFlyingAllowed, _isGroundMovementAllowed;
+
+    [SerializeField]
     private float _groundSpeed, _airSpeed, _verticalSpeed;
     [SerializeField]
     private float _airDashImpulse;

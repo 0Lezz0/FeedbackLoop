@@ -529,9 +529,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isFlying: 0
   _isDashing: 0
-  _groundSpeed: 100
-  _airSpeed: 150
-  _verticalSpeed: 75
+  _isFalling: 0
+  _groundSpeed: 120
+  _airSpeed: 175
+  _verticalSpeed: 100
   _airDashImpulse: 350
   _airDashCooldown: 3
   _airDashDuration: 2
