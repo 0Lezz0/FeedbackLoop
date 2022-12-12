@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 4995032953605196924}
   - component: {fileID: 4351721461255928720}
   m_Layer: 0
-  m_Name: Mecha
+  m_Name: Mecha(PlaceHolder)
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
