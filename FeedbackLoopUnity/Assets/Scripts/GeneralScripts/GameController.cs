@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -8,15 +6,19 @@ public class GameController : MonoBehaviour
     public static string ENVIORMENT_TAG = "Enviorment";
 
     [SerializeField]
-    private static GameObject player;
+    private static MechaStatus player;
 
-    
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag(PLAYER_TAG);
+        GameObject potentialPlayer = GameObject.FindGameObjectWithTag(PLAYER_TAG);
+        if(potentialPlayer.TryGetComponent(out player))
+        {
+            Debug.Log("Valid Player found");
+        }
     }
 
     // Update is called once per frame
@@ -27,6 +29,6 @@ public class GameController : MonoBehaviour
 
     public static Transform GetPlayerPosition()
     {
-        return player? player.transform : null;
+        return player? player.GetComponentInParent<Transform>(): null;
     }
 }
