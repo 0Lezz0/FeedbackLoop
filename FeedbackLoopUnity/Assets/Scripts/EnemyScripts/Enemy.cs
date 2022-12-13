@@ -6,13 +6,14 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private EnemyStats _stats;
-    private Vector3 patrollingStartPoint;
-    private EnemyMovement enemyMovement;
+    [SerializeField]
+    private GameObject _aimingPivot;
     [SerializeField]
     private bool _shouldChasePlayer, _shouldAttackPlayer;
     [SerializeField]
-    private bool _isChasingPlayer, _isPatrolling, _isAttacking; 
+    private bool _isChasingPlayer, _isPatrolling, _isAttacking;
 
+    private IEnemyMovement enemyMovement;
 
     public EnemyStats Stats { get => _stats; set => _stats = value; }
     public bool ShouldChasePlayer { get => _shouldChasePlayer; set => _shouldChasePlayer = value; }
@@ -20,14 +21,12 @@ public class Enemy : MonoBehaviour
     public bool IsChasingPlayer { get => _isChasingPlayer; set => _isChasingPlayer = value; }
     public bool IsPatrolling { get => _isPatrolling; set => _isPatrolling = value; }
     public bool IsAttacking { get => _isAttacking; set => _isAttacking = value; }
+    public GameObject AimingPivot { get => _aimingPivot; set => _aimingPivot = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (Stats.CanMove)
-        {
-            enemyMovement = gameObject.GetComponent<EnemyMovement>();
-        }
+        enemyMovement = gameObject.GetComponent<IEnemyMovement>();
     }
 
     // Update is called once per frame
@@ -39,17 +38,16 @@ public class Enemy : MonoBehaviour
 
     public void ChasePlayer()
     {
+        enemyMovement.MoveToPlayer();
         if (Stats.CanMove)
         {
-            enemyMovement.MoveToPlayer();
             IsChasingPlayer = true;
         }
     }
     public void StopChase()
     {
-        if (IsChasingPlayer && Stats.CanMove)
+        if (IsChasingPlayer)
         {
-            Debug.Log("will get him one day");
             IsChasingPlayer = false;
         }
     }
