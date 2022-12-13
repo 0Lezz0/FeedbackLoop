@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -9,7 +7,7 @@ using UnityEngine;
 public class MechaStatus : MonoBehaviour
 {
     [SerializeField]
-    private bool _isFlying, _isDashing, _isFalling;
+    private bool _isFlying, _isDashing, _isFalling, _isStuned;
 
     [SerializeField]
     private bool _isFlyingAllowed, _isGroundMovementAllowed;
@@ -36,6 +34,7 @@ public class MechaStatus : MonoBehaviour
     public float AirDashImpulse { get => _airDashImpulse; set => _airDashImpulse = value; }
     public float AirDashCooldown { get => _airDashCooldown; set => _airDashCooldown = value; }
     public float AirDashDuration { get => _airDashDuration; set => _airDashDuration = value; }
+    public bool IsStuned { get => _isStuned; set => _isStuned = value; }
 
 
     // Start is called before the first frame update

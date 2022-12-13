@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26f6e83b1c86ba48aeeac398f99404e, type: 3}
+  m_Name: FlyingChaser
+  m_EditorClassIdentifier: 
+  Name: Flying chaser
+  Description: Regular in size and not too strong, but dangerous in groups. Usually
+    attaks on formation.
+  BaseHealth: 100
+  BaseDamage: 10
+  BaseMovementSpeed: 30
+  AttackPerSecond: 3
+  ProjectileSpeed: 50
+  ProjectileNockBackForce: 10
+  Range: 50
+  Type: 0
+  CanMove: 1

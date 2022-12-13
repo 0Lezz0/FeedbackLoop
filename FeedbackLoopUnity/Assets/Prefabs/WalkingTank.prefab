@@ -2363,6 +2363,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 532047171024174425}
+  - component: {fileID: -167657836734713069}
+  - component: {fileID: 1352309359873892447}
   m_Layer: 0
   m_Name: WalkingTank
   m_TagString: Enemy
@@ -2388,6 +2390,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-167657836734713069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859993081478011457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ca4750046dce74daa1d305879a5120, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1352309359873892447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859993081478011457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b4b32a6f599c9246bab51837aeb965e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 11400000, guid: c77a240c0380f9e4ea8385b96ec92fa0, type: 2}
 --- !u!1 &8970582658977793849
 GameObject:
   m_ObjectHideFlags: 0

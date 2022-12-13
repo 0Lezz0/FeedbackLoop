@@ -9,6 +9,7 @@ TagManager:
   - Door
   - Reactor
   - Enemy
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
