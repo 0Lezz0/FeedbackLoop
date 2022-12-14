@@ -9,15 +9,17 @@ TagManager:
   - Door
   - Reactor
   - Enemy
+  - EnemyBullet
+  - BulletStorage
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Triggers
   - Water
   - UI
-  - 
-  - 
+  - BulletImpact
+  - BulletRealm
   - 
   - 
   - 

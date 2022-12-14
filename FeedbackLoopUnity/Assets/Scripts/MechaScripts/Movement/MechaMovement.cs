@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MechaMovement : MonoBehaviour
@@ -29,7 +28,6 @@ public class MechaMovement : MonoBehaviour
     public float VerticalCameraLimitGround { get => _verticalCameraLimitGround; set => _verticalCameraLimitGround = value; }
     public float VerticalCameraLimitAir { get => _verticalCameraLimitAir; set => _verticalCameraLimitAir = value; }
 
-    // Start is called before the first frame update
     void Start()
     {
         controlSystem = new MechaControls();
@@ -42,8 +40,6 @@ public class MechaMovement : MonoBehaviour
         mechaStatus.IsFlying = false;
         verticalCameraRotation = 0f;
     }
-
-    // Update is called once per frame
     void Update()
     {
         movement = mechaActions.Movement.ReadValue<Vector2>();
@@ -101,14 +97,35 @@ public class MechaMovement : MonoBehaviour
         }
     }
 
+    private void AimCamera(Vector2 aimingPoint)
+    {
 
+        verticalCameraRotation -= (aimingPoint.y * Time.deltaTime) * MouseSensitivity.y;
+        if (mechaStatus.IsFlying)
+        {
+            verticalCameraRotation = Mathf.Clamp(verticalCameraRotation, -1f * VerticalCameraLimitAir, VerticalCameraLimitAir);
+        }
+        else
+        {
+            verticalCameraRotation = Mathf.Clamp(verticalCameraRotation, -1f * VerticalCameraLimitGround, VerticalCameraLimitGround);
+        }
+
+        MainMechaCamera.transform.localRotation = Quaternion.Euler(verticalCameraRotation, 0, 0);
+        transform.Rotate(Vector3.up * (aimingPoint.x * Time.deltaTime) * MouseSensitivity.x);
+    }
+    private Vector3 GetMovementDirection()
+    {
+        Vector3 cameraForward = new(gameObject.transform.forward.x, 0, gameObject.transform.forward.z);
+        Vector3 cameraRight = new(gameObject.transform.right.x, 0, gameObject.transform.right.z);
+        Vector3 moveDirection = cameraForward.normalized * movement.y + cameraRight.normalized * movement.x;
+        return moveDirection;
+    }
     private void MoveOnGround()
     {
         Vector3 velocity = GetMovementDirection() * mechaStatus.GroundSpeed;
 
         mechaRigidBody.AddForce(velocity, ForceMode.Impulse);
     }
-
     private void MoveOnAir()
     {
         Vector3 moveDirection = GetMovementDirection();
@@ -118,14 +135,6 @@ public class MechaMovement : MonoBehaviour
             moveDirection.z * mechaStatus.AirSpeed);
 
         mechaRigidBody.AddForce(velocity, ForceMode.Impulse);
-    }
-
-    private Vector3 GetMovementDirection()
-    {
-        Vector3 cameraForward = new(gameObject.transform.forward.x, 0, gameObject.transform.forward.z);
-        Vector3 cameraRight = new(gameObject.transform.right.x, 0, gameObject.transform.right.z);
-        Vector3 moveDirection = cameraForward.normalized * movement.y + cameraRight.normalized * movement.x;
-        return moveDirection;
     }
 
     private void TakeOff()
@@ -140,28 +149,11 @@ public class MechaMovement : MonoBehaviour
             mechaStatus.IsFalling = true;
         }
     }
-
+    
     private bool CanDash()
     {
         return mechaStatus.IsFlying && !mechaStatus.IsDashing;
-    }
-    
-    private void AimCamera(Vector2 aimingPoint)
-    {
-
-        verticalCameraRotation -= (aimingPoint.y * Time.deltaTime) * MouseSensitivity.y;
-        if (mechaStatus.IsFlying)
-        {
-            verticalCameraRotation = Mathf.Clamp(verticalCameraRotation, -1f * VerticalCameraLimitAir, VerticalCameraLimitAir);
-        }
-        else {
-            verticalCameraRotation = Mathf.Clamp(verticalCameraRotation, -1f * VerticalCameraLimitGround, VerticalCameraLimitGround);
-        }
-
-        MainMechaCamera.transform.localRotation = Quaternion.Euler(verticalCameraRotation, 0, 0);
-        transform.Rotate(Vector3.up * (aimingPoint.x * Time.deltaTime) * MouseSensitivity.x);
-    }
-
+    } 
     private void Dash()
     {
         if (CanDash())
@@ -180,10 +172,8 @@ public class MechaMovement : MonoBehaviour
             mechaStatus.IsDashing = false;
         }
     }
-
     private IEnumerator DashCoroutine(Vector3 movementDirection)
     {
-
         mechaStatus.IsDashing = true;
         mechaRigidBody.AddForce(movementDirection * mechaStatus.AirDashImpulse, ForceMode.VelocityChange);
         yield return new WaitForSeconds(mechaStatus.AirDashDuration);

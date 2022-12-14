@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1628126637970856022}
   - component: {fileID: 6034585610193274471}
   - component: {fileID: 1885195213076757557}
-  - component: {fileID: 8438719166720510117}
   m_Layer: 0
   m_Name: AnthenaBase (1)
   m_TagString: Untagged
@@ -85,20 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8438719166720510117
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6860031837027205227}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &7327251182844554741
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +95,6 @@ GameObject:
   - component: {fileID: 746404260832677494}
   - component: {fileID: 7021964797052117785}
   - component: {fileID: 4399069683662962168}
-  - component: {fileID: 1540181172742485252}
   m_Layer: 0
   m_Name: Anthena
   m_TagString: Untagged
@@ -183,17 +167,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1540181172742485252
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7327251182844554741}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
