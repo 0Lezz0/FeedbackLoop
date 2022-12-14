@@ -13,11 +13,9 @@ public class EnemyBullet : MonoBehaviour
     public float ImpactForce { get => _impactForce; set => _impactForce = value; }
     public EnemyTypes EnemyType { get => _enemyType; set => _enemyType = value; }
 
-    public EnemyBullet(int damage, float impactForce, EnemyTypes enemyType)
+    private void OnCollisionEnter(Collision collision)
     {
-        Damage = damage;
-        ImpactForce = impactForce;
-        EnemyType = enemyType;
+        BulletPool.GetInstance().ReturnBulletToPool(gameObject);
     }
 
 }

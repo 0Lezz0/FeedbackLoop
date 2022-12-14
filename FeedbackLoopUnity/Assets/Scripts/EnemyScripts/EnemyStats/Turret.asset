@@ -16,11 +16,13 @@ MonoBehaviour:
   Description: Small and Weak, but whit an impressive rate of fire
   BaseHealth: 50
   BaseDamage: 10
+  AttackPerBurst: 10
+  AttackCoolDownInSeconds: 2
   BaseMovementSpeed: 0
-  AttackPerSecond: 10
-  ProjectileSpeed: 100
+  ProjectileSpeed: 15
   ProjectileNockBackForce: 0
   ProjectileScale: 1
-  Range: 75
+  ProjectileDelay: 0.15
+  Range: 50
   Type: 2
   CanMove: 0

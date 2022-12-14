@@ -4,6 +4,7 @@ public class GameController : MonoBehaviour
 {
     public static string PLAYER_TAG = "Player";
     public static string ENVIORMENT_TAG = "Enviorment";
+    public static string ENEMY_BULLET = "EnemyBullet";
 
     public static int MAX_BULLETS_ON_SCREEN = 1000;
 

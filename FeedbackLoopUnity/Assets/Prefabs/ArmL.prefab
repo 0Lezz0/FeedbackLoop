@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5528068074932663243}
   - component: {fileID: 572850645737921359}
   - component: {fileID: 9201814000220429879}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3328138038165256267}
   - component: {fileID: 6222262654224165140}
   - component: {fileID: 4543892240641781098}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpperArmL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 1777646223828264578}
   - component: {fileID: 1045102860545099247}
   - component: {fileID: 8601841528849069076}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4251169958164565611}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerArmL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 626987119811306561}
   - component: {fileID: 2020467845064780203}
   - component: {fileID: 6042825230793597988}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HandJointL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 901353124119782065}
   - component: {fileID: 2731631569409637625}
   - component: {fileID: 1875484257658268581}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,7 +473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6892368175722944499}
   - component: {fileID: 5102483441994011770}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ArmL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 6075304710246057468}
   - component: {fileID: 4257638268486838835}
   - component: {fileID: 5437382582020904996}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ElbowJointL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 5988004888266658866}
   - component: {fileID: 5037062216780124870}
   - component: {fileID: 1182957704357621176}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 6501718098345794831}
   - component: {fileID: 709967001908896108}
   - component: {fileID: 595421088128917809}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +772,7 @@ GameObject:
   - component: {fileID: 7788556034145924474}
   - component: {fileID: 2970841981449963600}
   - component: {fileID: 2812668911715678522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerArmL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +866,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6626391445455475893}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HandL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -908,7 +908,7 @@ GameObject:
   - component: {fileID: 8123632494174032816}
   - component: {fileID: 3028527805916999137}
   - component: {fileID: 7681181160679464445}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShoulderL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1004,6 +1004,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunBarrelR
       objectReference: {fileID: 0}
+    - target: {fileID: 963152653149673144, guid: 222c0be3b9ec95246b8a8625ed682cfc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530651968083667053, guid: 222c0be3b9ec95246b8a8625ed682cfc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6376549647395087145, guid: 222c0be3b9ec95246b8a8625ed682cfc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1081,6 +1089,14 @@ PrefabInstance:
     - target: {fileID: 963152653149673144, guid: 222c0be3b9ec95246b8a8625ed682cfc, type: 3}
       propertyPath: m_Name
       value: GunBarrelR (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 963152653149673144, guid: 222c0be3b9ec95246b8a8625ed682cfc, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530651968083667053, guid: 222c0be3b9ec95246b8a8625ed682cfc, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6376549647395087145, guid: 222c0be3b9ec95246b8a8625ed682cfc, type: 3}
       propertyPath: m_RootOrder

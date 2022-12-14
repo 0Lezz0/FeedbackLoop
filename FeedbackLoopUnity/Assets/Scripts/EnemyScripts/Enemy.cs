@@ -26,8 +26,6 @@ public class Enemy : MonoBehaviour
     public GameObject AimingPivot { get => _aimingPivot; set => _aimingPivot = value; }
     public GameObject BulletSpawn { get => _bulletSpawn; set => _bulletSpawn = value; }
 
-
-    private bool canAttack = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,11 +37,14 @@ public class Enemy : MonoBehaviour
     {
         if (ShouldChasePlayer)
             ChasePlayer();
+
+        if (IsPlayerInRange())
+            enemyMovement.LookAtPlayer();
     }
 
     private void FixedUpdate()
     {
-        if (IsPlayerInRangeOfAttack())
+        if (IsPlayerInRange() && ShouldAttackPlayer)
         {
             StartAttackPlayer();
         }
@@ -52,45 +53,44 @@ public class Enemy : MonoBehaviour
 
     public void ChasePlayer()
     {
-        enemyMovement.MoveToPlayer();
         if (Stats.CanMove)
         {
+            enemyMovement.MoveToPlayer();
             IsChasingPlayer = true;
         }
     }
-    public void StopChase()
-    {
-        if (IsChasingPlayer)
-        {
-            IsChasingPlayer = false;
-        }
-    }
+
     public IEnumerator AttackPlayer()
     {
-        GameObject bullet = BulletPool.GetInstance().GetBullet();
-        if(bullet != null)
+        IsAttacking = true;
+        for (int i = 0; i < Stats.AttackPerBurst; i++)
         {
-            bullet.transform.position = BulletSpawn.transform.position;
-            bullet.transform.localScale = bullet.transform.localScale * Stats.ProjectileScale;
-            bullet.SetActive(true);
-            bullet.GetComponent<Rigidbody>().AddForce(AimingPivot.transform.forward.normalized * Stats.ProjectileSpeed, ForceMode.VelocityChange);
-            canAttack = false;
-            yield return new WaitForSeconds(1 / Stats.AttackPerSecond);
-            canAttack = true;
+            GameObject bullet = BulletPool.GetInstance().GetBullet();
+            if (bullet != null)
+            {
+                bullet.transform.position = BulletSpawn.transform.position;
+                bullet.transform.localScale = bullet.transform.localScale * Stats.ProjectileScale;
+                bullet.SetActive(true);
+                bullet.GetComponent<Rigidbody>().AddForce(AimingPivot.transform.forward.normalized * Stats.ProjectileSpeed, ForceMode.VelocityChange);
+                
+                yield return new WaitForSeconds(Stats.ProjectileDelay);
+            }
+            else
+            {
+                yield return new WaitForEndOfFrame();
+            }
         }
-        else
-        {
-            yield return new WaitForEndOfFrame();
-        }
+        yield return new WaitForSeconds(Stats.AttackCoolDownInSeconds);
+        IsAttacking = false;
     }
 
     private void StartAttackPlayer()
     {
-        if(canAttack)
+        if(!IsAttacking)
             StartCoroutine(AttackPlayer());
     }
 
-    public bool IsPlayerInRangeOfAttack()
+    public bool IsPlayerInRange()
     {
         Transform playerPosition = GameController.GetPlayerPosition();
         if (playerPosition != null)

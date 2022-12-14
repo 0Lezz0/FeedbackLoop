@@ -17,11 +17,13 @@ MonoBehaviour:
     attaks on formation.
   BaseHealth: 100
   BaseDamage: 25
+  AttackPerBurst: 5
+  AttackCoolDownInSeconds: 3
   BaseMovementSpeed: 5
-  AttackPerSecond: 3
-  ProjectileSpeed: 50
+  ProjectileSpeed: 10
   ProjectileNockBackForce: 10
   ProjectileScale: 2
-  Range: 50
+  ProjectileDelay: 0.2
+  Range: 25
   Type: 0
   CanMove: 1

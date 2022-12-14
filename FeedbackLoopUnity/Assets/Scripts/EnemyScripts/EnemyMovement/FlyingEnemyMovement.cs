@@ -9,13 +9,21 @@ public class FlyingEnemyMovement : MonoBehaviour, IEnemyMovement
         Debug.Log("Going back to my normal flight patterns");
     }
 
+    public void LookAtPlayer()
+    {
+        Transform playerPosition = GameController.GetPlayerPosition();
+        if (playerPosition != null)
+        {
+            pivotPoint.transform.LookAt(playerPosition);
+        }
+    }
+
     public void MoveToPlayer()
     {
         float step = Time.deltaTime * stats.BaseMovementSpeed;
         Transform playerPosition = GameController.GetPlayerPosition();
         if (playerPosition != null)
         {
-            pivotPoint.transform.LookAt(playerPosition);
             Vector3 movementDirection = playerPosition.position - gameObject.transform.position;
             float distance = movementDirection.magnitude;
             if (distance > stats.Range)

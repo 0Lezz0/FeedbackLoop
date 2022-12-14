@@ -28,6 +28,7 @@ public class EnemyZone : MonoBehaviour
             foreach (Enemy enemy in enemiesInTheZone)
             {
                 enemy.ShouldChasePlayer = isPlayerInTheZone;
+                enemy.ShouldAttackPlayer = isPlayerInTheZone;
             }
         }
     }
@@ -40,6 +41,7 @@ public class EnemyZone : MonoBehaviour
             foreach (Enemy enemy in enemiesInTheZone)
             {
                 enemy.ShouldChasePlayer = isPlayerInTheZone;
+                enemy.ShouldAttackPlayer = isPlayerInTheZone;
             }
         }
     }

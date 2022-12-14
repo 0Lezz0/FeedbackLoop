@@ -16,11 +16,13 @@ MonoBehaviour:
   Description: Slow but packs quite a punch, an absolut unit
   BaseHealth: 250
   BaseDamage: 150
+  AttackPerBurst: 1
+  AttackCoolDownInSeconds: 4
   BaseMovementSpeed: 1
-  AttackPerSecond: 1
-  ProjectileSpeed: 30
+  ProjectileSpeed: 8
   ProjectileNockBackForce: 50
   ProjectileScale: 5
+  ProjectileDelay: 1
   Range: 100
   Type: 1
   CanMove: 1

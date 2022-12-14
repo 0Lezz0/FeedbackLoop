@@ -9,6 +9,21 @@ public class WalkingEnemyMovement : MonoBehaviour, IEnemyMovement
         Debug.Log("Going back  to my morning stroll");
     }
 
+    public void LookAtPlayer()
+    {
+        Transform playerPosition = GameController.GetPlayerPosition();
+        if (playerPosition != null)
+        {
+            Vector3 movementDirection = playerPosition.position - gameObject.transform.position;
+            Vector3 bodyRotationDirection = new Vector3(movementDirection.x, 0, movementDirection.z);
+            float distance = movementDirection.magnitude;
+            Quaternion targetBodyRotation = Quaternion.LookRotation(bodyRotationDirection);
+            Quaternion targetPivotRotation = Quaternion.LookRotation(movementDirection);
+            gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, targetBodyRotation, 1);
+            pivotPoint.transform.rotation = Quaternion.Slerp(pivotPoint.transform.rotation, targetPivotRotation, 1);
+        }
+    }
+
     public void MoveToPlayer()
     {
         float step = Time.deltaTime * stats.BaseMovementSpeed;

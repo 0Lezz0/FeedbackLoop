@@ -6,7 +6,7 @@ public class BulletPool
 {
     private static BulletPool instance;
     private BasicPooling bulletPool;
-
+    private GameObject originalBulletPrefab, originalSpawn;
     void OnEnable()
     {
         //EventManager.OnEnemyDeath += StartReturnEnemyToPool;
@@ -36,6 +36,8 @@ public class BulletPool
     {
 
         bulletPool = new BasicPooling(bulletPrefab, spawn, amount);
+        originalBulletPrefab = bulletPrefab;
+        originalSpawn = spawn;
     }
 
 
@@ -46,6 +48,9 @@ public class BulletPool
 
     public void ReturnBulletToPool(GameObject bullet)
     {
+        bullet.transform.position = originalSpawn.transform.position;
+        bullet.transform.localScale = originalBulletPrefab.transform.localScale;
+        bullet.SetActive(false);
         bulletPool.AddElemenToPool(bullet);
     }
 

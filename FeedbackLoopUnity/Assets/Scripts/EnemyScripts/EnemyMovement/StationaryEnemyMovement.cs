@@ -12,6 +12,11 @@ public class StationaryEnemyMovement : MonoBehaviour, IEnemyMovement
 
     public void MoveToPlayer()
     {
+       //This class can't move
+    }
+
+    public void LookAtPlayer()
+    {
         Transform playerPosition = GameController.GetPlayerPosition();
         if (playerPosition != null)
         {
