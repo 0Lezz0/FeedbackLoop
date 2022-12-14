@@ -18,7 +18,6 @@ public class GameController : MonoBehaviour
     public GameObject BulletPrefab { get => _bulletPrefab; set => _bulletPrefab = value; }
 
 
-
     // Start is called before the first frame update
     void Start()
     {

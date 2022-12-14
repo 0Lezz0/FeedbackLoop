@@ -4,10 +4,6 @@ public class FlyingEnemyMovement : MonoBehaviour, IEnemyMovement
 {
     private EnemyStats stats;
     private GameObject pivotPoint;
-    public void GoBackToPatrol()
-    {
-        Debug.Log("Going back to my normal flight patterns");
-    }
 
     public void LookAtPlayer()
     {
@@ -26,7 +22,7 @@ public class FlyingEnemyMovement : MonoBehaviour, IEnemyMovement
         {
             Vector3 movementDirection = playerPosition.position - gameObject.transform.position;
             float distance = movementDirection.magnitude;
-            if (distance > stats.Range)
+            if (distance > stats.AttackRange)
             {
                 gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, playerPosition.transform.position, step);
             }
@@ -36,8 +32,7 @@ public class FlyingEnemyMovement : MonoBehaviour, IEnemyMovement
     // Start is called before the first frame update
     void Start()
     {
-        Enemy enemy;
-        if(gameObject.TryGetComponent(out enemy))
+        if(gameObject.TryGetComponent(out Enemy enemy))
         {
 
             stats = enemy.Stats;

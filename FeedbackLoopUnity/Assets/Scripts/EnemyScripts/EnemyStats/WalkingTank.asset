@@ -23,6 +23,7 @@ MonoBehaviour:
   ProjectileNockBackForce: 50
   ProjectileScale: 5
   ProjectileDelay: 1
-  Range: 100
+  TargetingRange: 110
+  AttackRange: 100
   Type: 1
   CanMove: 1

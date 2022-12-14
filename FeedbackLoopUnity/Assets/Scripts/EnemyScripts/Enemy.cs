@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -44,11 +43,10 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsPlayerInRange() && ShouldAttackPlayer)
+        if (IsPlayerInRangeOfAttack() && ShouldAttackPlayer)
         {
             StartAttackPlayer();
         }
-        //canAttack = false;
     }
 
     public void ChasePlayer()
@@ -59,7 +57,12 @@ public class Enemy : MonoBehaviour
             IsChasingPlayer = true;
         }
     }
-
+    
+    private void StartAttackPlayer()
+    {
+        if(!IsAttacking)
+            StartCoroutine(AttackPlayer());
+    }
     public IEnumerator AttackPlayer()
     {
         IsAttacking = true;
@@ -72,7 +75,7 @@ public class Enemy : MonoBehaviour
                 bullet.transform.localScale = bullet.transform.localScale * Stats.ProjectileScale;
                 bullet.SetActive(true);
                 bullet.GetComponent<Rigidbody>().AddForce(AimingPivot.transform.forward.normalized * Stats.ProjectileSpeed, ForceMode.VelocityChange);
-                
+
                 yield return new WaitForSeconds(Stats.ProjectileDelay);
             }
             else
@@ -83,13 +86,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(Stats.AttackCoolDownInSeconds);
         IsAttacking = false;
     }
-
-    private void StartAttackPlayer()
-    {
-        if(!IsAttacking)
-            StartCoroutine(AttackPlayer());
-    }
-
+    
     public bool IsPlayerInRange()
     {
         Transform playerPosition = GameController.GetPlayerPosition();
@@ -97,7 +94,18 @@ public class Enemy : MonoBehaviour
         {
             Vector3 movementDirection = playerPosition.position - gameObject.transform.position;
             float distance = movementDirection.magnitude;
-            return distance <= Stats.Range;
+            return distance <= Stats.TargetingRange;
+        }
+        return false;
+    }
+    public bool IsPlayerInRangeOfAttack()
+    {
+        Transform playerPosition = GameController.GetPlayerPosition();
+        if (playerPosition != null)
+        {
+            Vector3 movementDirection = playerPosition.position - gameObject.transform.position;
+            float distance = movementDirection.magnitude;
+            return distance <= Stats.AttackRange;
         }
         return false;
     }
@@ -108,11 +116,6 @@ public class Enemy : MonoBehaviour
     }
 
     public void OnDeath()
-    {
-
-    }
-
-    public void Patrol()
     {
 
     }

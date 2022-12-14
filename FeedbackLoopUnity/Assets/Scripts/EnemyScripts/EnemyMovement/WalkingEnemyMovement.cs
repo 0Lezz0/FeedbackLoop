@@ -4,11 +4,6 @@ public class WalkingEnemyMovement : MonoBehaviour, IEnemyMovement
 {
     private EnemyStats stats;
     private GameObject pivotPoint;
-    public void GoBackToPatrol()
-    {
-        Debug.Log("Going back  to my morning stroll");
-    }
-
     public void LookAtPlayer()
     {
         Transform playerPosition = GameController.GetPlayerPosition();
@@ -16,7 +11,6 @@ public class WalkingEnemyMovement : MonoBehaviour, IEnemyMovement
         {
             Vector3 movementDirection = playerPosition.position - gameObject.transform.position;
             Vector3 bodyRotationDirection = new Vector3(movementDirection.x, 0, movementDirection.z);
-            float distance = movementDirection.magnitude;
             Quaternion targetBodyRotation = Quaternion.LookRotation(bodyRotationDirection);
             Quaternion targetPivotRotation = Quaternion.LookRotation(movementDirection);
             gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, targetBodyRotation, 1);
@@ -31,14 +25,9 @@ public class WalkingEnemyMovement : MonoBehaviour, IEnemyMovement
         if (playerPosition != null)
         {
             Vector3 movementDirection = playerPosition.position - gameObject.transform.position;
-            Vector3 bodyRotationDirection = new Vector3(movementDirection.x, 0, movementDirection.z);
             float distance = movementDirection.magnitude;
-            Quaternion targetBodyRotation = Quaternion.LookRotation(bodyRotationDirection);
-            Quaternion targetPivotRotation = Quaternion.LookRotation(movementDirection);
-            gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, targetBodyRotation, 1);
-            pivotPoint.transform.rotation = Quaternion.Slerp(pivotPoint.transform.rotation, targetPivotRotation, 1);
 
-            if (distance > stats.Range)
+            if (distance > stats.AttackRange)
             {
                 Vector3 targetPosition = new Vector3(playerPosition.transform.position.x,
                                                         gameObject.transform.position.y,
@@ -51,10 +40,8 @@ public class WalkingEnemyMovement : MonoBehaviour, IEnemyMovement
     // Start is called before the first frame update
     void Start()
     {
-        Enemy enemy;
-        if (gameObject.TryGetComponent(out enemy))
+        if (gameObject.TryGetComponent(out Enemy enemy))
         {
-
             stats = enemy.Stats;
             pivotPoint = enemy.AimingPivot;
         }

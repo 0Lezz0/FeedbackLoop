@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MechaCollisions : MonoBehaviour
 {
-
     private Rigidbody mechaRigidBody;
     private MechaStatus mechaStatus;
     // Start is called before the first frame update

@@ -11,7 +11,7 @@ public class EnemyStats : ScriptableObject
     public int AttackPerBurst, AttackCoolDownInSeconds;
     public float BaseMovementSpeed;
     public float ProjectileSpeed, ProjectileNockBackForce, ProjectileScale, ProjectileDelay;
-    public int Range;
+    public int TargetingRange, AttackRange;
     public EnemyTypes Type;
     public bool CanMove;
 }
