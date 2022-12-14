@@ -367,6 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: d04e34b41df94c243a2f44a2db2d6926, type: 2}
   _aimingPivot: {fileID: 2515943818444172961}
+  _bulletSpawn: {fileID: 7157451934209269867}
   _shouldChasePlayer: 0
   _shouldAttackPlayer: 0
   _isChasingPlayer: 0
@@ -1010,6 +1011,11 @@ PrefabInstance:
 --- !u!4 &417275071935327023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6376549647395087145, guid: 222c0be3b9ec95246b8a8625ed682cfc, type: 3}
+  m_PrefabInstance: {fileID: 6752157432873797638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7157451934209269867 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4530651968083667053, guid: 222c0be3b9ec95246b8a8625ed682cfc, type: 3}
   m_PrefabInstance: {fileID: 6752157432873797638}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7898023363001908984

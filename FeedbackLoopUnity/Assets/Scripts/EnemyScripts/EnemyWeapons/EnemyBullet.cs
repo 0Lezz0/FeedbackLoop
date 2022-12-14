@@ -19,4 +19,5 @@ public class EnemyBullet : MonoBehaviour
         ImpactForce = impactForce;
         EnemyType = enemyType;
     }
+
 }

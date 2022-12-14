@@ -16,11 +16,12 @@ MonoBehaviour:
   Description: Regular in size and not too strong, but dangerous in groups. Usually
     attaks on formation.
   BaseHealth: 100
-  BaseDamage: 10
+  BaseDamage: 25
   BaseMovementSpeed: 5
   AttackPerSecond: 3
   ProjectileSpeed: 50
   ProjectileNockBackForce: 10
+  ProjectileScale: 2
   Range: 50
   Type: 0
   CanMove: 1

@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject _aimingPivot;
     [SerializeField]
+    private GameObject _bulletSpawn;
+    [SerializeField]
     private bool _shouldChasePlayer, _shouldAttackPlayer;
     [SerializeField]
     private bool _isChasingPlayer, _isPatrolling, _isAttacking;
@@ -22,7 +24,10 @@ public class Enemy : MonoBehaviour
     public bool IsPatrolling { get => _isPatrolling; set => _isPatrolling = value; }
     public bool IsAttacking { get => _isAttacking; set => _isAttacking = value; }
     public GameObject AimingPivot { get => _aimingPivot; set => _aimingPivot = value; }
+    public GameObject BulletSpawn { get => _bulletSpawn; set => _bulletSpawn = value; }
 
+
+    private bool canAttack = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +39,15 @@ public class Enemy : MonoBehaviour
     {
         if (ShouldChasePlayer)
             ChasePlayer();
+    }
+
+    private void FixedUpdate()
+    {
+        if (IsPlayerInRangeOfAttack())
+        {
+            StartAttackPlayer();
+        }
+        //canAttack = false;
     }
 
     public void ChasePlayer()
@@ -51,9 +65,41 @@ public class Enemy : MonoBehaviour
             IsChasingPlayer = false;
         }
     }
-    public void AttackPlayer()
+    public IEnumerator AttackPlayer()
     {
+        GameObject bullet = BulletPool.GetInstance().GetBullet();
+        if(bullet != null)
+        {
+            bullet.transform.position = BulletSpawn.transform.position;
+            bullet.transform.localScale = bullet.transform.localScale * Stats.ProjectileScale;
+            bullet.SetActive(true);
+            bullet.GetComponent<Rigidbody>().AddForce(AimingPivot.transform.forward.normalized * Stats.ProjectileSpeed, ForceMode.VelocityChange);
+            canAttack = false;
+            yield return new WaitForSeconds(1 / Stats.AttackPerSecond);
+            canAttack = true;
+        }
+        else
+        {
+            yield return new WaitForEndOfFrame();
+        }
+    }
 
+    private void StartAttackPlayer()
+    {
+        if(canAttack)
+            StartCoroutine(AttackPlayer());
+    }
+
+    public bool IsPlayerInRangeOfAttack()
+    {
+        Transform playerPosition = GameController.GetPlayerPosition();
+        if (playerPosition != null)
+        {
+            Vector3 movementDirection = playerPosition.position - gameObject.transform.position;
+            float distance = movementDirection.magnitude;
+            return distance <= Stats.Range;
+        }
+        return false;
     }
 
     public void TakeDamage()

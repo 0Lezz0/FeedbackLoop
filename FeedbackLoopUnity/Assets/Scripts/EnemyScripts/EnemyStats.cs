@@ -9,7 +9,7 @@ public class EnemyStats : ScriptableObject
     public int BaseHealth;
     public int BaseDamage;
     public float BaseMovementSpeed;
-    public float AttackPerSecond, ProjectileSpeed, ProjectileNockBackForce;
+    public float AttackPerSecond, ProjectileSpeed, ProjectileNockBackForce, ProjectileScale;
     public int Range;
     public EnemyTypes Type;
     public bool CanMove;

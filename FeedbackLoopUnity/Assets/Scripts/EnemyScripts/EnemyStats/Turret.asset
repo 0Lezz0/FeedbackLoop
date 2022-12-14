@@ -20,5 +20,7 @@ MonoBehaviour:
   AttackPerSecond: 10
   ProjectileSpeed: 100
   ProjectileNockBackForce: 0
+  ProjectileScale: 1
   Range: 75
   Type: 2
+  CanMove: 0
