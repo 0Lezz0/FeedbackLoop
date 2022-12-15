@@ -37,6 +37,7 @@ public class HeavyRifle : MonoBehaviour, IMechaWeapon
             //AcitvateEffectOnHit(hit.point);
             if (hit.collider.CompareTag(GameController.ENEMY))
             {
+                Debug.DrawRay(gunBarrel.transform.position, ray.direction * hit.distance, Color.red);
                 Enemy enemy;
                 if (hit.collider.gameObject.TryGetComponent(out enemy))
                 {
@@ -81,15 +82,18 @@ public class HeavyRifle : MonoBehaviour, IMechaWeapon
 
     private void AcitvateEffectOnHit(Vector3 hitPoint)
     {
+       
         GameObject particleHit = ParticleEffectPool.GetInstance().GetParticle();
-        if (particleHit != null)
+        if (particleHit != null )
         {
             particleHit.SetActive(true);
             if (particleHit.TryGetComponent(out ParticleSystem heavyRifleHit))
             {
+                Debug.Log("This should be showing something");
                 heavyRifleHit.transform.position = hitPoint;
                 heavyRifleHit.Play();
             }
         }
+        ParticleEffectPool.GetInstance().ReturnParticleToPool(particleHit);
     }
 }

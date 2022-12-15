@@ -349,6 +349,7 @@ GameObject:
   - component: {fileID: 2654567623731778588}
   - component: {fileID: 4422218412000418867}
   - component: {fileID: 4039356170918223498}
+  - component: {fileID: 1949326334397443985}
   m_Layer: 0
   m_Name: FlyingChaser
   m_TagString: Enemy
@@ -421,6 +422,22 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1949326334397443985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263722266506078826}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8089d15dd19054b81bcbba53ace1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 0
+  _currentHealth: 0
+  _isInvulnerable: 0
+  _invulnerabilityTime: 0
 --- !u!1 &9084235909945097150
 GameObject:
   m_ObjectHideFlags: 0

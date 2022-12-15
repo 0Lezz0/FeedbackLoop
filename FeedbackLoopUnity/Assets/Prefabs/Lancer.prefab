@@ -6126,6 +6126,7 @@ GameObject:
   - component: {fileID: -2802265805769449847}
   - component: {fileID: 3234646751575953032}
   - component: {fileID: 6268080828409674563}
+  - component: {fileID: 4579457749317346135}
   m_Layer: 0
   m_Name: Lancer
   m_TagString: Player
@@ -6237,6 +6238,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &4579457749317346135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982532844637400040}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8089d15dd19054b81bcbba53ace1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 500
+  _currentHealth: 0
+  _isInvulnerable: 0
+  _invulnerabilityTime: 0.25
 --- !u!1 &4102552846503560368
 GameObject:
   m_ObjectHideFlags: 0

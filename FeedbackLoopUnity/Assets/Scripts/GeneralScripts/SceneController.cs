@@ -15,4 +15,9 @@ public class SceneController : MonoBehaviour
     {
         
     }
+
+    public static void OnPlayerDeath()
+    {
+        //Game-over, splash-screen then reset stage
+    }
 }

@@ -13,8 +13,22 @@ public class EnemyBullet : MonoBehaviour
     public float ImpactForce { get => _impactForce; set => _impactForce = value; }
     public EnemyTypes EnemyType { get => _enemyType; set => _enemyType = value; }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnCollisionExit(Collision collision)
     {
+        InitializeSelf();
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        InitializeSelf();
+    }
+
+    public void InitializeSelf()
+    {
+        Damage = 0;
+        ImpactForce = 0;
+        EnemyType = EnemyTypes.FlyinChaser;
         BulletPool.GetInstance().ReturnBulletToPool(gameObject);
     }
 

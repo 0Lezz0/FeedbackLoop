@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Heavy Rifle
   FlavorText: A high caliber cannon tuned for an exceptional rate of fire
-  BaseDamage: 1
+  BaseDamage: 5
   EffectiveRange: 50
   ProjectileSpeed: 0
   RateOfFire: 20
