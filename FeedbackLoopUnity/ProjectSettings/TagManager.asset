@@ -3,16 +3,24 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enviorment
+  - Wall
+  - Door
+  - Reactor
+  - Enemy
+  - EnemyBullet
+  - BulletStorage
+  - MainUI
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Triggers
   - Water
   - UI
-  - 
-  - 
+  - BulletImpact
+  - BulletRealm
   - 
   - 
   - 
