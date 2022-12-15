@@ -110,9 +110,9 @@ public class Enemy : MonoBehaviour
         return false;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-
+        Debug.Log(string.Format("AUCH! that hurts for a total of {0} damage, I {1} will take revenge", damage, Stats.name));
     }
 
     public void OnDeath()

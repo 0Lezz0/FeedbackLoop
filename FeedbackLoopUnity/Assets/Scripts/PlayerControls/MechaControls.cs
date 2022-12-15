@@ -78,7 +78,7 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
                     ""id"": ""fdbf2fbd-48c8-4a1a-b3cf-3b5ab020ba4a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {

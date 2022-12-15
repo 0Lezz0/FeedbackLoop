@@ -144,3 +144,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnPoint: {fileID: 0}
   _bulletPrefab: {fileID: 2921248424849593457, guid: a576a249620b9994e843123a8a5ce8a6, type: 3}
+  _particleHitPrefab: {fileID: 7360146997148236899, guid: fa35462386f2d4d488d300c81b1107ae, type: 3}
