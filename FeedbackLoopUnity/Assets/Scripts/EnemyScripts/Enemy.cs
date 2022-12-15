@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IEnemy
 {
     [SerializeField]
     private EnemyStats _stats;
