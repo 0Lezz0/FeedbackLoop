@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DesertCanyon.unity
     guid: 39b2da66aa3bb524b9578ceadf201506
+  - enabled: 1
+    path: Assets/Scenes/DerelictReactor.unity
+    guid: 42e1b72916262da4e83e735602ffb3fd
   m_configObjects: {}

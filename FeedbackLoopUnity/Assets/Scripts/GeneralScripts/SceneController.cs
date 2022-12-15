@@ -31,7 +31,7 @@ public class SceneController : MonoBehaviour
         if(canChangeScene && mechaActions.Interact.triggered)
         {
             //Scene transition to SceneTransitionTo
-            Debug.Log("Traveling to " + SceneTransitionTo);
+            LoadNewScene();
         }
     }
 
