@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - EnemyBullet
   - BulletStorage
+  - MainUI
   layers:
   - Default
   - TransparentFX

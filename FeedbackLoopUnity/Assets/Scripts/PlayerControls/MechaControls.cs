@@ -89,6 +89,15 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""49f2e8f2-bcdc-4aec-8eba-c737a4984ca3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -234,6 +243,17 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
                     ""action"": ""TakeOff"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""836f16ff-f3cc-4572-b085-a85758728cbb"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -255,6 +275,7 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
         m_MechaActions_Aim = m_MechaActions.FindAction("Aim", throwIfNotFound: true);
         m_MechaActions_Shootmain = m_MechaActions.FindAction("Shoot main", throwIfNotFound: true);
         m_MechaActions_Shootspecial = m_MechaActions.FindAction("Shoot special", throwIfNotFound: true);
+        m_MechaActions_Interact = m_MechaActions.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -321,6 +342,7 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_MechaActions_Aim;
     private readonly InputAction m_MechaActions_Shootmain;
     private readonly InputAction m_MechaActions_Shootspecial;
+    private readonly InputAction m_MechaActions_Interact;
     public struct MechaActionsActions
     {
         private @MechaControls m_Wrapper;
@@ -332,6 +354,7 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_MechaActions_Aim;
         public InputAction @Shootmain => m_Wrapper.m_MechaActions_Shootmain;
         public InputAction @Shootspecial => m_Wrapper.m_MechaActions_Shootspecial;
+        public InputAction @Interact => m_Wrapper.m_MechaActions_Interact;
         public InputActionMap Get() { return m_Wrapper.m_MechaActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -362,6 +385,9 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
                 @Shootspecial.started -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnShootspecial;
                 @Shootspecial.performed -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnShootspecial;
                 @Shootspecial.canceled -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnShootspecial;
+                @Interact.started -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_MechaActionsActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_MechaActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -387,6 +413,9 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
                 @Shootspecial.started += instance.OnShootspecial;
                 @Shootspecial.performed += instance.OnShootspecial;
                 @Shootspecial.canceled += instance.OnShootspecial;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -409,5 +438,6 @@ public partial class @MechaControls : IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnShootmain(InputAction.CallbackContext context);
         void OnShootspecial(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

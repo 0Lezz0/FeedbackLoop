@@ -74,7 +74,7 @@ public class MechaStatus : MonoBehaviour
 
     public void OnDeath()
     {
-        SceneController.OnPlayerDeath();
+        GameController.OnPlayerDeath();
     }
 
 }

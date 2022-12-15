@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/DesertCanyon.unity
+    guid: 39b2da66aa3bb524b9578ceadf201506
   m_configObjects: {}
