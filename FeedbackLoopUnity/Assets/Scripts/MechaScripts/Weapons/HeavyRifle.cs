@@ -11,36 +11,38 @@ public class HeavyRifle : MonoBehaviour, IMechaWeapon
 
     public void AimWeapon()
     {
-        RaycastHit hit;
         Ray ray = new Ray(gunBarrel.transform.position, Camera.main.transform.forward);
-        if (Physics.Raycast(ray, out hit, 1000))
+        if (Physics.Raycast(ray, out RaycastHit hit, Camera.main.farClipPlane))
         {
-            Debug.DrawRay(gunBarrel.transform.position, ray.direction * hit.distance, Color.red);
             aimingPivot.transform.LookAt(hit.point);
         }
-
-        /*
-        Plane playerPlane = new Plane(Vector3.up, transform.position);
-        Ray ray = Camera.main.Ra
-
-        float hitDist = 0f;
-
-        if (playerPlane.Raycast(ray, out hitDist))
-        {
-            Vector3 targetPoint = ray.GetPoint(hitDist);
-            Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
-            targetRotation.x = 0;
-            targetRotation.z = 0;
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 7f * Time.deltaTime);
-        }
-        */
-        
     }
 
     public void FireWeapon()
     {
-        throw new System.NotImplementedException();
+        RaycastHit hit;
+        Ray ray = new Ray(gunBarrel.transform.position, Camera.main.transform.forward);
+        if (Physics.Raycast(ray, out hit, stats.EffectiveRange))
+        {
+            if (hit.collider.CompareTag(GameController.ENEMY))
+            {
+                Enemy enemy;
+                if (hit.collider.gameObject.TryGetComponent(out enemy))
+                {
+                    enemy.TakeDamage(stats.BaseDamage);
+                    Debug.DrawRay(gunBarrel.transform.position, ray.direction * hit.distance, Color.cyan);
+                }
+                else
+                {
+                    enemy = hit.collider.gameObject.GetComponentInParent<Enemy>();
+                    if (enemy != null)
+                    {
+                        enemy.TakeDamage(stats.BaseDamage);
+                        Debug.DrawRay(gunBarrel.transform.position, ray.direction * hit.distance, Color.white);
+                    }
+                }
+            }
+        }
     }
 
     // Start is called before the first frame update

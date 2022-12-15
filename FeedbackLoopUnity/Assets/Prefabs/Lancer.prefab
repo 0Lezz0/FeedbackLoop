@@ -6121,6 +6121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2932030952109967257}
+  - component: {fileID: 2670125134709080216}
   - component: {fileID: 8720265607159721065}
   - component: {fileID: -2802265805769449847}
   - component: {fileID: 3234646751575953032}
@@ -6149,6 +6150,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2670125134709080216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982532844637400040}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7747d34f4dff6c84ab62c329610f3bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainWeapon: {fileID: 3432630062184246954}
+  _specialWeapon: {fileID: 8959912531798165156}
+  _shouldAttackMain: 0
+  _shouldAttackSpecial: 0
 --- !u!114 &8720265607159721065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19292,6 +19309,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2529275561692738785, guid: 03141657666ac514badfe53db4d7f63e, type: 3}
   m_PrefabInstance: {fileID: 8088473001594408215}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8959912531798165156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 871454976083872691, guid: 03141657666ac514badfe53db4d7f63e, type: 3}
+  m_PrefabInstance: {fileID: 8088473001594408215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9071001943309466672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19424,5 +19446,10 @@ PrefabInstance:
 --- !u!4 &2469151700367895491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6892368175722944499, guid: ad09c8fbdf9b5f84aacc28a63c629418, type: 3}
+  m_PrefabInstance: {fileID: 9071001943309466672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3432630062184246954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5927171347020452506, guid: ad09c8fbdf9b5f84aacc28a63c629418, type: 3}
   m_PrefabInstance: {fileID: 9071001943309466672}
   m_PrefabAsset: {fileID: 0}

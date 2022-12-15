@@ -5,6 +5,7 @@ public class GameController : MonoBehaviour
     public static string PLAYER_TAG = "Player";
     public static string ENVIORMENT_TAG = "Enviorment";
     public static string ENEMY_BULLET = "EnemyBullet";
+    public static string ENEMY = "Enemy";
 
     public static int MAX_BULLETS_ON_SCREEN = 1000;
 
@@ -28,6 +29,7 @@ public class GameController : MonoBehaviour
             potentialPlayer.transform.SetPositionAndRotation(SpawnPoint.transform.position, SpawnPoint.transform.localRotation);
             potentialPlayer.GetComponent<MechaCollisions>().enabled = true;
             potentialPlayer.GetComponent<MechaMovement>().enabled = true;
+            potentialPlayer.GetComponent<MechaWeaponController>().enabled = true;
         }
 
         BulletPool bulletPool = BulletPool.GetInstance();

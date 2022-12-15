@@ -15,7 +15,7 @@ public class MissileBarrage : MonoBehaviour, IMechaWeapon
 
     public void FireWeapon()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Imagine i'm discharging an alarming ammount of missiles.");
     }
 
     // Start is called before the first frame update
