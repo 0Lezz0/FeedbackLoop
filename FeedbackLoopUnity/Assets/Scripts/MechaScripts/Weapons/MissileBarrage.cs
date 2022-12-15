@@ -18,6 +18,11 @@ public class MissileBarrage : MonoBehaviour, IMechaWeapon
         Debug.Log("Imagine i'm discharging an alarming ammount of missiles.");
     }
 
+    public ParticleSystem GetFiringEffect()
+    {
+        return null;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

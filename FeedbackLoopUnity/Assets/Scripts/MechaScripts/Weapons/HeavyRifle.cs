@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HeavyRifle : MonoBehaviour, IMechaWeapon
@@ -8,6 +7,10 @@ public class HeavyRifle : MonoBehaviour, IMechaWeapon
     private GameObject gunBarrel, aimingPivot;
     [SerializeField]
     private MechaWeaponStats stats;
+    [SerializeField]
+    private ParticleSystem muzzleFlash;
+
+    private bool isFiring;
 
     public void AimWeapon()
     {
@@ -20,17 +23,24 @@ public class HeavyRifle : MonoBehaviour, IMechaWeapon
 
     public void FireWeapon()
     {
+        if (!isFiring)
+            StartCoroutine(FiringWeapon());
+    }
+
+    private IEnumerator FiringWeapon()
+    {
+        isFiring = true;
         RaycastHit hit;
         Ray ray = new Ray(gunBarrel.transform.position, Camera.main.transform.forward);
         if (Physics.Raycast(ray, out hit, stats.EffectiveRange))
         {
+            //AcitvateEffectOnHit(hit.point);
             if (hit.collider.CompareTag(GameController.ENEMY))
             {
                 Enemy enemy;
                 if (hit.collider.gameObject.TryGetComponent(out enemy))
                 {
                     enemy.TakeDamage(stats.BaseDamage);
-                    Debug.DrawRay(gunBarrel.transform.position, ray.direction * hit.distance, Color.cyan);
                 }
                 else
                 {
@@ -38,11 +48,13 @@ public class HeavyRifle : MonoBehaviour, IMechaWeapon
                     if (enemy != null)
                     {
                         enemy.TakeDamage(stats.BaseDamage);
-                        Debug.DrawRay(gunBarrel.transform.position, ray.direction * hit.distance, Color.white);
                     }
                 }
             }
+
         }
+        yield return new WaitForSeconds(stats.TimeBetweenShots);
+        isFiring = false;
     }
 
     // Start is called before the first frame update
@@ -54,11 +66,30 @@ public class HeavyRifle : MonoBehaviour, IMechaWeapon
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
     {
         AimWeapon();
+    }
+
+    public ParticleSystem GetFiringEffect()
+    {
+        return muzzleFlash;
+    }
+
+    private void AcitvateEffectOnHit(Vector3 hitPoint)
+    {
+        GameObject particleHit = ParticleEffectPool.GetInstance().GetParticle();
+        if (particleHit != null)
+        {
+            particleHit.SetActive(true);
+            if (particleHit.TryGetComponent(out ParticleSystem heavyRifleHit))
+            {
+                heavyRifleHit.transform.position = hitPoint;
+                heavyRifleHit.Play();
+            }
+        }
     }
 }

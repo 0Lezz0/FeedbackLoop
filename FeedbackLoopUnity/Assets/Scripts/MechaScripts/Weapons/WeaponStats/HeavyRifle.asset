@@ -15,9 +15,9 @@ MonoBehaviour:
   Name: Heavy Rifle
   FlavorText: A high caliber cannon tuned for an exceptional rate of fire
   BaseDamage: 1
-  EffectiveRange: 30
+  EffectiveRange: 50
   ProjectileSpeed: 0
   RateOfFire: 20
-  TimeBetweenShots: 0.001
+  TimeBetweenShots: 0.05
   ProjectilesPerVoley: 1
   Cooldown: 10

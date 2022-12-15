@@ -11,6 +11,8 @@ public class MechaWeaponController : MonoBehaviour
 
     [SerializeField]
     private GameObject _mainWeapon, _specialWeapon;
+    [SerializeField]
+    private ParticleSystem mainWeaponEffect;
 
     [SerializeField]
     private bool _shouldAttackMain, _shouldAttackSpecial;
@@ -33,9 +35,17 @@ public class MechaWeaponController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (mechaActions.Shootmain.WasPerformedThisFrame())
+        if (mechaActions.Shootmain.IsInProgress())
         {
             ShouldAttackMain = true;
+            if (!mainWeaponEffect.isEmitting)
+                mainWeaponEffect.Play();
+        }
+
+        if (mechaActions.Shootmain.WasReleasedThisFrame())
+        {
+            if (mainWeaponEffect.isEmitting)
+                mainWeaponEffect.Stop();
         }
 
         if (mechaActions.Shootspecial.WasPerformedThisFrame())

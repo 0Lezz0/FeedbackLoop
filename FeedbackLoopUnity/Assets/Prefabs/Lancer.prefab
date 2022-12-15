@@ -6164,6 +6164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainWeapon: {fileID: 3432630062184246954}
   _specialWeapon: {fileID: 8959912531798165156}
+  mainWeaponEffect: {fileID: 4389866156472356986}
   _shouldAttackMain: 0
   _shouldAttackSpecial: 0
 --- !u!114 &8720265607159721065
@@ -19451,5 +19452,10 @@ Transform:
 --- !u!1 &3432630062184246954 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5927171347020452506, guid: ad09c8fbdf9b5f84aacc28a63c629418, type: 3}
+  m_PrefabInstance: {fileID: 9071001943309466672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4389866156472356986 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4686378282036096074, guid: ad09c8fbdf9b5f84aacc28a63c629418, type: 3}
   m_PrefabInstance: {fileID: 9071001943309466672}
   m_PrefabAsset: {fileID: 0}

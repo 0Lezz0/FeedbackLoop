@@ -8,15 +8,17 @@ public class GameController : MonoBehaviour
     public static string ENEMY = "Enemy";
 
     public static int MAX_BULLETS_ON_SCREEN = 1000;
+    public static int MAX_PARTICLE_HIT_EFFECT_ON_SCREEN = 100;
 
     [SerializeField]
     private static MechaStatus player;
 
     [SerializeField]
-    private GameObject _spawnPoint, _bulletPrefab;
+    private GameObject _spawnPoint, _bulletPrefab, _particleHitPrefab;
 
     public GameObject SpawnPoint { get => _spawnPoint; set => _spawnPoint = value; }
     public GameObject BulletPrefab { get => _bulletPrefab; set => _bulletPrefab = value; }
+    public GameObject ParticleHitPrefab { get => _particleHitPrefab; set => _particleHitPrefab = value; }
 
 
     // Start is called before the first frame update
@@ -34,6 +36,8 @@ public class GameController : MonoBehaviour
 
         BulletPool bulletPool = BulletPool.GetInstance();
         bulletPool.InitializePool(BulletPrefab, MAX_BULLETS_ON_SCREEN, gameObject);
+        //ParticleEffectPool particlePool = ParticleEffectPool.GetInstance();
+        //particlePool.InitializePool(ParticleHitPrefab, MAX_PARTICLE_HIT_EFFECT_ON_SCREEN, gameObject);
     }
 
     // Update is called once per frame
