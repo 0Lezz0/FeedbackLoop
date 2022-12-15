@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
     public static string ENVIORMENT_TAG = "Enviorment";
     public static string ENEMY_BULLET = "EnemyBullet";
     public static string ENEMY = "Enemy";
+    public static string DOOR = "Door";
+    public static string MAIN_UI = "MainUI";
 
     public static int MAX_BULLETS_ON_SCREEN = 1000;
     public static int MAX_PARTICLE_HIT_EFFECT_ON_SCREEN = 50;
@@ -50,5 +52,10 @@ public class GameController : MonoBehaviour
     public static Transform GetPlayerPosition()
     {
         return player? player.GetComponentInParent<Transform>(): null;
+    }
+
+    public static void OnPlayerDeath()
+    {
+        //Game-over, splash-screen then reset stage
     }
 }

@@ -8,6 +8,7 @@ public class MechaCollisions : MonoBehaviour
     void Start()
     {
         mechaStatus = gameObject.GetComponent<MechaStatus>();
+
     }
 
     private void OnCollisionEnter(Collision collision)
