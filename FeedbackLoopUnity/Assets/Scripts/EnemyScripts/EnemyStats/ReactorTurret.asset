@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26f6e83b1c86ba48aeeac398f99404e, type: 3}
+  m_Name: ReactorTurret
+  m_EditorClassIdentifier: 
+  Name: Smart Turret
+  Description: Small and Weak, but whit an impressive rate of fire
+  BaseHealth: 50
+  BaseDamage: 30
+  AttackPerBurst: 10
+  AttackCoolDownInSeconds: 2
+  BaseMovementSpeed: 0
+  ProjectileSpeed: 300
+  ProjectileNockBackForce: 0
+  ProjectileScale: 20
+  ProjectileDelay: 0.15
+  TargetingRange: 5500
+  AttackRange: 5000
+  Type: 2
+  CanMove: 0

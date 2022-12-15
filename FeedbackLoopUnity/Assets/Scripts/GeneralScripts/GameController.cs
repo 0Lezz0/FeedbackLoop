@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class GameController : MonoBehaviour
     public static int MAX_PARTICLE_HIT_EFFECT_ON_SCREEN = 50;
 
     [SerializeField]
+    private static int _currentLoop;
+
+    [SerializeField]
     private static MechaStatus player;
 
     [SerializeField]
@@ -21,6 +25,7 @@ public class GameController : MonoBehaviour
     public GameObject SpawnPoint { get => _spawnPoint; set => _spawnPoint = value; }
     public GameObject BulletPrefab { get => _bulletPrefab; set => _bulletPrefab = value; }
     public GameObject ParticleHitPrefab { get => _particleHitPrefab; set => _particleHitPrefab = value; }
+    public static int CurrentLoop { get => _currentLoop; }
 
 
     // Start is called before the first frame update
@@ -41,6 +46,8 @@ public class GameController : MonoBehaviour
         bulletPool.InitializePool(BulletPrefab, MAX_BULLETS_ON_SCREEN, gameObject);
         //ParticleEffectPool particlePool = ParticleEffectPool.GetInstance();
         //particlePool.InitializePool(ParticleHitPrefab, MAX_PARTICLE_HIT_EFFECT_ON_SCREEN, gameObject);
+
+        //Loads the current loop from file
     }
 
     // Update is called once per frame
@@ -57,5 +64,16 @@ public class GameController : MonoBehaviour
     public static void OnPlayerDeath()
     {
         //Game-over, splash-screen then reset stage
+    }
+
+    public static void NextLoop()
+    {
+        //increases the current loop
+        _currentLoop++;
+        //saves the new loop on a file
+
+        //re-launches the game with the updated loop
+
+        SceneManager.LoadScene((int)Scenes.DessertCanyon);
     }
 }

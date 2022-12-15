@@ -37,9 +37,7 @@ public class HeavyRifle : MonoBehaviour, IMechaWeapon
             //AcitvateEffectOnHit(hit.point);
             if (hit.collider.CompareTag(GameController.ENEMY))
             {
-                Debug.DrawRay(gunBarrel.transform.position, ray.direction * hit.distance, Color.red);
-                Enemy enemy;
-                if (hit.collider.gameObject.TryGetComponent(out enemy))
+                if (hit.collider.gameObject.TryGetComponent(out IEnemy enemy))
                 {
                     enemy.TakeDamage(stats.BaseDamage);
                 }
