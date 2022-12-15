@@ -2,7 +2,6 @@ using UnityEngine;
 
 /// <summary>
 /// This class is used to determinatediferent states of the playable character
-/// It probably should be a singleton
 /// </summary>
 public class MechaStatus : MonoBehaviour
 {
@@ -18,6 +17,9 @@ public class MechaStatus : MonoBehaviour
     private float _airDashImpulse;
     [SerializeField]
     private float _airDashCooldown, _airDashDuration;
+
+    private HealthSystem healthSystem;
+
     public bool IsFlying { get => _isFlying; set => _isFlying = value; }
     public bool IsDashing { get => _isDashing; set => _isDashing = value; }
     public bool IsFalling { get
@@ -40,7 +42,7 @@ public class MechaStatus : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthSystem = gameObject.GetComponent<HealthSystem>();
     }
 
     // Update is called once per frame
@@ -59,6 +61,20 @@ public class MechaStatus : MonoBehaviour
     public void ToggleFallingState()
     {
         IsFalling = !IsFalling;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        healthSystem.TakeDamage(damage);
+        if (healthSystem.IsDead())
+        {
+            OnDeath();
+        }
+    }
+
+    public void OnDeath()
+    {
+        SceneController.OnPlayerDeath();
     }
 
 }

@@ -32,7 +32,7 @@ public class ParticleEffectPool
         return particlePool.GetObject();
     }
 
-    public void ReturnBulletToPool(GameObject particle)
+    public void ReturnParticleToPool(GameObject particle)
     {
         particle.transform.position = originalSpawn.transform.position;
         particle.SetActive(false);

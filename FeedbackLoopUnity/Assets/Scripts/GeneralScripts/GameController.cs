@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
     public static string ENEMY = "Enemy";
 
     public static int MAX_BULLETS_ON_SCREEN = 1000;
-    public static int MAX_PARTICLE_HIT_EFFECT_ON_SCREEN = 100;
+    public static int MAX_PARTICLE_HIT_EFFECT_ON_SCREEN = 50;
 
     [SerializeField]
     private static MechaStatus player;
@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
             potentialPlayer.GetComponent<MechaCollisions>().enabled = true;
             potentialPlayer.GetComponent<MechaMovement>().enabled = true;
             potentialPlayer.GetComponent<MechaWeaponController>().enabled = true;
+            potentialPlayer.GetComponent<HealthSystem>().enabled = true;
         }
 
         BulletPool bulletPool = BulletPool.GetInstance();
