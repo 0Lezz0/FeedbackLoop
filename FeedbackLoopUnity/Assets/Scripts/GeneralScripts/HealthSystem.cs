@@ -60,5 +60,6 @@ public class HealthSystem : MonoBehaviour
     public void InitializeHealth(int maxHealth)
     {
         MaxHealth = maxHealth;
+        Revive();
     }
 }
