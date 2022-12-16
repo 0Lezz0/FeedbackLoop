@@ -47,7 +47,19 @@ public class GameController : MonoBehaviour
         //ParticleEffectPool particlePool = ParticleEffectPool.GetInstance();
         //particlePool.InitializePool(ParticleHitPrefab, MAX_PARTICLE_HIT_EFFECT_ON_SCREEN, gameObject);
 
-        //Loads the current loop from file
+        //Loads the current loop from file; if No file is present, tries to create a new one.
+        if(CurrentLoop == 0)
+        {
+            LoopConfig loopStoredConfig = FileController.LoadData();
+            if(loopStoredConfig == null)
+            {
+                FileController.SaveCurrentLoop(new LoopConfig(CurrentLoop));
+            }
+            else
+            {
+                _currentLoop = (int)loopStoredConfig?.currentLoop;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -71,9 +83,14 @@ public class GameController : MonoBehaviour
         //increases the current loop
         _currentLoop++;
         //saves the new loop on a file
+        FileController.SaveCurrentLoop(new LoopConfig(CurrentLoop));
 
         //re-launches the game with the updated loop
-
         SceneManager.LoadScene((int)Scenes.DessertCanyon);
+    }
+
+    public static void ResetLoop()
+    {
+        FileController.SaveCurrentLoop(new LoopConfig(0));
     }
 }
