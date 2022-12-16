@@ -56,8 +56,6 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene((int)SceneTransitionTo);
     }
-
-
 }
 
 public enum Scenes
