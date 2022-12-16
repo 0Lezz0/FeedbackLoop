@@ -13,7 +13,6 @@ public static class FileController
         BinaryFormatter formatter = new BinaryFormatter();
 
         string path = Application.persistentDataPath + fileName;
-        Debug.Log(path);
         FileStream stream = new FileStream(path, FileMode.Create);
         formatter.Serialize(stream, loopConfig);
 
@@ -26,7 +25,6 @@ public static class FileController
         {
             string path = Application.persistentDataPath + fileName;
 
-            Debug.Log(path);
             if (File.Exists(path))
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter(); 

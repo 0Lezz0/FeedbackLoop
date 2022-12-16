@@ -34,7 +34,6 @@ public class GameController : MonoBehaviour
         GameObject potentialPlayer = GameObject.FindGameObjectWithTag(PLAYER_TAG);
         if(potentialPlayer.TryGetComponent(out player))
         {
-            Debug.Log("Valid Player found");
             potentialPlayer.transform.SetPositionAndRotation(SpawnPoint.transform.position, SpawnPoint.transform.localRotation);
             potentialPlayer.GetComponent<MechaCollisions>().enabled = true;
             potentialPlayer.GetComponent<MechaMovement>().enabled = true;
