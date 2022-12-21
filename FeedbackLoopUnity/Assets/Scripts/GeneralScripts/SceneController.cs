@@ -1,3 +1,4 @@
+using Config;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
-        UIPanel = GameObject.FindGameObjectWithTag(GameController.MAIN_UI);
+        UIPanel = GameObject.FindGameObjectWithTag(ConstantsAndFixedValues.MAIN_UI);
         controlSystem = new MechaControls();
         mechaActions = controlSystem.MechaActions;
         mechaActions.Enable();
@@ -37,7 +38,7 @@ public class SceneController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(GameController.PLAYER_TAG))
+        if (other.CompareTag(ConstantsAndFixedValues.PLAYER_TAG))
         {
             canChangeScene = true;
             UIPanel.GetComponent<UIController>().ActivateInteractPanel();
@@ -45,7 +46,7 @@ public class SceneController : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag(GameController.PLAYER_TAG))
+        if (other.CompareTag(ConstantsAndFixedValues.PLAYER_TAG))
         {
             canChangeScene = false;
             UIPanel.GetComponent<UIController>().DeactivateInteractPanel();
@@ -55,11 +56,17 @@ public class SceneController : MonoBehaviour
     public void LoadNewScene()
     {
         SceneManager.LoadScene((int)SceneTransitionTo);
+    }    
+    
+    public void LoadNewScene(Scenes newScene)
+    {
+        SceneManager.LoadScene((int)newScene);
     }
 }
 
 public enum Scenes
 {
+    MainMenu,
     DessertCanyon,
     ReactorCore
 }

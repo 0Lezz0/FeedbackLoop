@@ -1,18 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Config;
 
 public class GameController : MonoBehaviour
 {
-    public static string PLAYER_TAG = "Player";
-    public static string ENVIORMENT_TAG = "Enviorment";
-    public static string ENEMY_BULLET = "EnemyBullet";
-    public static string ENEMY = "Enemy";
-    public static string DOOR = "Door";
-    public static string MAIN_UI = "MainUI";
-
-    public static int MAX_BULLETS_ON_SCREEN = 1000;
-    public static int MAX_PARTICLE_HIT_EFFECT_ON_SCREEN = 50;
-
     [SerializeField]
     private static int _currentLoop;
 
@@ -27,11 +18,19 @@ public class GameController : MonoBehaviour
     public GameObject ParticleHitPrefab { get => _particleHitPrefab; set => _particleHitPrefab = value; }
     public static int CurrentLoop { get => _currentLoop; }
 
+    void OnEnable()
+    {
+        PlayerEventManager.OnPlayerDeath += OnPlayerDeath;
+    }
 
-    // Start is called before the first frame update
+    void OnDisable()
+    {
+        PlayerEventManager.OnPlayerDeath -= OnPlayerDeath;
+    }
+
     void Start()
     {
-        GameObject potentialPlayer = GameObject.FindGameObjectWithTag(PLAYER_TAG);
+        GameObject potentialPlayer = GameObject.FindGameObjectWithTag(ConstantsAndFixedValues.PLAYER_TAG);
         if(potentialPlayer.TryGetComponent(out player))
         {
             potentialPlayer.transform.SetPositionAndRotation(SpawnPoint.transform.position, SpawnPoint.transform.localRotation);
@@ -42,7 +41,7 @@ public class GameController : MonoBehaviour
         }
 
         BulletPool bulletPool = BulletPool.GetInstance();
-        bulletPool.InitializePool(BulletPrefab, MAX_BULLETS_ON_SCREEN, gameObject);
+        bulletPool.InitializePool(BulletPrefab, ConstantsAndFixedValues.DEFAUTL_MAX_BULLETS_ON_SCREEN, gameObject);
         //ParticleEffectPool particlePool = ParticleEffectPool.GetInstance();
         //particlePool.InitializePool(ParticleHitPrefab, MAX_PARTICLE_HIT_EFFECT_ON_SCREEN, gameObject);
 
@@ -61,12 +60,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public static Transform GetPlayerPosition()
     {
         return player? player.GetComponentInParent<Transform>(): null;
@@ -74,7 +67,8 @@ public class GameController : MonoBehaviour
 
     public static void OnPlayerDeath()
     {
-        //Game-over, splash-screen then reset stage
+        Debug.Log("On no, you died :(! That's great, because you are awful >:|");
+        //Reset the active level, while the 'game over' splash UI is active... find a way to keep the UI up?
     }
 
     public static void NextLoop()

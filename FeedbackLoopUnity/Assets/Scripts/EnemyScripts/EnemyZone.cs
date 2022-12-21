@@ -1,3 +1,4 @@
+using Config;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,7 @@ public class EnemyZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(GameController.PLAYER_TAG))
+        if (other.gameObject.CompareTag(ConstantsAndFixedValues.PLAYER_TAG))
         {
             isPlayerInTheZone = true;
             foreach (Enemy enemy in enemiesInTheZone)
@@ -35,7 +36,7 @@ public class EnemyZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag(GameController.PLAYER_TAG))
+        if (other.gameObject.CompareTag(ConstantsAndFixedValues.PLAYER_TAG))
         {
             isPlayerInTheZone = false;
             foreach (Enemy enemy in enemiesInTheZone)

@@ -1,3 +1,4 @@
+using Config;
 using System.Collections;
 using UnityEngine;
 
@@ -35,7 +36,7 @@ public class HeavyRifle : MonoBehaviour, IMechaWeapon
         if (Physics.Raycast(ray, out hit, stats.EffectiveRange))
         {
             //AcitvateEffectOnHit(hit.point);
-            if (hit.collider.CompareTag(GameController.ENEMY))
+            if (hit.collider.CompareTag(ConstantsAndFixedValues.ENEMY))
             {
                 if (hit.collider.gameObject.TryGetComponent(out IEnemy enemy))
                 {

@@ -1,0 +1,16 @@
+public enum EventList
+{
+    NEW_GAME,
+    RESET_LOOP,
+    QUIT,
+    START_GAME,
+    PAUSE,
+    RESUME_PAUSE,
+    START_NEW_LOOP,
+    END_CURRENT_LOOP,
+    CHANGE_SCENE,
+    PLAYER_DAMAGE,
+    PLAYER_DEATH,
+    ENEMY_DAMAGE,
+    ENEMY_DEATH
+}

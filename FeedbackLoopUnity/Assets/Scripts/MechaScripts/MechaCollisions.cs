@@ -1,3 +1,4 @@
+using Config;
 using UnityEngine;
 
 public class MechaCollisions : MonoBehaviour
@@ -13,7 +14,7 @@ public class MechaCollisions : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(GameController.ENVIORMENT_TAG))
+        if (collision.gameObject.CompareTag(ConstantsAndFixedValues.ENVIORMENT_TAG))
         {
             if (mechaStatus.IsFlying || mechaStatus.IsFalling)
             {

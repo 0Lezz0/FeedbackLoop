@@ -65,16 +65,24 @@ public class MechaStatus : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        healthSystem.TakeDamage(damage);
-        if (healthSystem.IsDead())
+        //This actually calculates the damage taken, BUT this doesn't have in consideration the actual damage taken, because this has IFRAMEs
+        if (healthSystem.TakeDamage(damage))
         {
-            OnDeath();
+            Debug.Log("Take damage for " + damage);
+            PlayerEventManager.PlayerTakesDamage(healthSystem.CurrentHealth);
+
+            if (healthSystem.IsDead())
+            {
+                OnDeath();
+            }
         }
+        
     }
 
     public void OnDeath()
     {
-        GameController.OnPlayerDeath();
+        //Do something else on death?
+        PlayerEventManager.PlayerDies();
     }
 
 }

@@ -26,7 +26,7 @@ public class HealthSystem : MonoBehaviour
     {
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
         if(damage > 0 && !IsDead() && !IsInvulnerable)
         {
@@ -35,7 +35,9 @@ public class HealthSystem : MonoBehaviour
             {
                 StartCoroutine(StartIframes());
             }
+            return true;
         }
+        return false;
             
     }
 
@@ -62,4 +64,10 @@ public class HealthSystem : MonoBehaviour
         MaxHealth = maxHealth;
         Revive();
     }
+}
+
+public class HealthUpdateReport
+{
+    public int HealthOffset { get; set; }
+    public int HealthUpdatedValue { get; set; }
 }
